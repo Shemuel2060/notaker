@@ -9,8 +9,8 @@
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost/arola_cornellnotaker</property>
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">isaacnewton</property>
+        <property name="connection.username">arola</property>
+        <property name="connection.password">arola2023-2024</property>
         <property name="connection.pool_size">10</property>
 
         <!--property name="dialect">org.hibernate.dialect.MySQLDialect</property-->
@@ -19,7 +19,7 @@
         <property name="format_sql">false</property>
         <!-- Enable SQL comments -->
         <property name="hibernate.use_sql_comments">true</property>
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
 
         <!--tell hibernate to use the c3p0 connection pool specified in the pom.xml
     instead of the built in -->
