@@ -27,12 +27,16 @@ public class Notebook {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private int notebookId;
 	
-	@Column(name="TITLE")
+	@Column(name="TITLE", unique=true)
 	private String title;
 	
 	@Column(name="DESCRIPTION")
 	private String description;
 	
+	public Notebook(String subject, String description) {
+		this.title = subject;
+		this.description = description;	
+	}
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST,
 			CascadeType.MERGE,CascadeType.DETACH, 
@@ -43,16 +47,6 @@ public class Notebook {
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL,
 				mappedBy="notebook")
 	private List<Note> notes; // notes in a notebooks
-
-	/**
-	 * creates a notebook with title an
-	 * @param title
-	 * @param description
-	 */
-	public Notebook(String title, String description) {
-		this.title = title;
-		this.description = description;
-	}
 	
 	// getters, setters, toString and No-args constructor added by Lombok
 	
@@ -62,5 +56,11 @@ public class Notebook {
 		}
 		this.user = user;
 	}
-
+	
+	public Notebook addNotebook() {
+		
+		return null;
+	}
+	
+	
 } // END:: Notebook class.
