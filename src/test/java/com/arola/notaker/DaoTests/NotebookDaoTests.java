@@ -3,9 +3,11 @@ package com.arola.notaker.DaoTests;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.arola.notaker.dao.NotebookDao;
@@ -47,10 +49,16 @@ public class NotebookDaoTests {
 		assertEquals(nb.getTitle(),"Organic Chemistry");
 	}
 	
-	public void populatDBWithNotebooksTest() {
-		
-		
-		
+	@Test
+	public void deleteNotebookByTitleTest() {
+		Notebook nb = NotebookDao.getNotebookByTitle(NotebookDao.session, "Chemistry");
+		NotebookDao.deleteNotebookByTitle(NotebookDao.session, "Chemistry");
+		assertNull(nb.getTitle());
+	}
+	
+	@BeforeTest
+	public void populaNotebooksTest() {
+		NotebookDao.populateNotebooks();
 	}
 
 }

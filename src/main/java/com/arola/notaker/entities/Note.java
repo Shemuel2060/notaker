@@ -1,6 +1,8 @@
 package com.arola.notaker.entities;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,9 +16,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,6 +28,7 @@ import lombok.NoArgsConstructor;
 @Table(name="NOTE")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor 
 public class Note {
 	
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
@@ -33,13 +38,13 @@ public class Note {
 	private String title;
 	
 	@Column(name="NOTE_CONTENTS")
-	private String contentS;
+	private String contents;
 	
 	@Column(name="NOTE_CREATIONDATE")
-	private Date creationDate;
+	private LocalDate creationDate;
 	
 	@Column(name="NOTE_LASTMODIFICATIONDATE")
-	private Date lastModifiedDate;
+	private LocalDate lastModifiedDate;
 	
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade= {
@@ -67,31 +72,24 @@ public class Note {
 								   inverseJoinColumns = @JoinColumn(name = "TAG_ID"))
 	private Set<Tag> tags;
 	
-	/**
-	 * creates a new note within a notebook...
-	 * @param title
-	 * @param contents
-	 * @return
-	 */
-	public Note createNote(String title, String contents) {
-		return null; // for now...
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "notes",
+			cascade= {
+					CascadeType.DETACH,CascadeType.MERGE, 
+					CascadeType.PERSIST,CascadeType.REFRESH
+			})
+    private List<Sources> referenced;
+
+	public Note(String title, LocalDate creationDate, User user) {
+		this.title = title;
+		this.creationDate = creationDate;
+		this.user = user;
 	}
 	
-	/**
-	 * edit an already existing note in a notebook
-	 * @return
-	 */
-	public Note editNote(String title, String newContent) {
-		return null;
-	}
 	
-	/**
-	 * delete a given note in a given notebook
-	 * @param title
-	 * @param notebook
-	 */
-	public void deleteNote(String title, Notebook notebook) {
-		
-	}
+
+	
+	
+	
+	
 
 }

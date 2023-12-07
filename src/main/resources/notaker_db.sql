@@ -2,14 +2,19 @@ DROP DATABASE IF EXISTS arola_cornellnotaker;
 
 CREATE DATABASE arola_cornellnotaker;
 
+-- GRANT ALL PRIVILEGES ON arola_cornellnotaker.* TO 'arola'@'localhost';
+
 USE arola_cornellnotaker; 
 
 -- CRUD OPERATIONS
-
-
-
--- Error Code: 1044. Access denied for user 'arola'@'localhost' to database 'arola_cornellnotaker'
-
+SELECT * FROM note;
+SELECT * FROM note_tags;
+SELECT * FROM reference_sources;
+SELECT * FROM reference_sources_note;
+SELECT * FROM notebook;
+SELECT * FROM reminders;
+SELECT * FROM tags;
+SELECT * FROM user;
 
 
 
