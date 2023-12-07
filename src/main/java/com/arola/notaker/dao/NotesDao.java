@@ -12,60 +12,8 @@ import com.arola.notaker.entities.Notebook;
 import com.arola.notaker.entities.User;
 import com.arola.util.SessionUtil;
 
-public class NotesDao {
+public class NotesDao implements InoteDao{
 	
-	/* ==================== CREATING notes ====================  */
-	
-	/**
-	 * create a note if it does not exist in the DB. It first
-	 * searches for the note and if it exists, it logs a message
-	 * indicating that the note already exists, otherwise, it
-	 * creates the note.
-	 * 
-	 * @param title
-	 * @param creationDate
-	 * @param user
-	 * @return
-	 */
-	public static Note createNote(String title, LocalDate creationDate, User user) {
-	    // Create a new Note instance
-	   
-	    Session session = SessionUtil.getSession();
-	    Note note = findNote(session,title);
-	    Note theNote = new Note();
-	    
-	    if(note == null) {
-	    	// Set Note properties
-	    	note = new Note(); // first instantiate it
-		    note.setTitle(title);
-		    note.setCreationDate(creationDate);
-		    note.setUser(user); // Associate the Note with the provided User
-
-		    // Save the Note to the database
-		    Transaction transaction = null;
-		    try {
-		        transaction = session.beginTransaction();
-
-		        // Assuming you have a Hibernate session available (session variable)
-		        session.save(user);
-		        session.save(note);
-
-		        transaction.commit();
-		    } catch (Exception e) {
-		        if (transaction != null) {
-		            transaction.rollback();
-		        }
-		        e.printStackTrace(); // Handle the exception appropriately in your application
-		    }
-
-		    theNote = note;
-	    }else {
-	    	System.out.println("Note already existing!");
-	    	theNote = null; // use Logger class to log some message here...
-	    	
-	    }
-		return theNote; 
-	} // END:: createNote(String title, LocalDate creationDate, User user)
 	
 	public static void populateNotesData() {
 		try(Session session = SessionUtil.getSession()){
@@ -80,20 +28,14 @@ public class NotesDao {
 			LocalDate today = LocalDate.now();
 			LocalDate yest = LocalDate.of(2022, 7, 14);
 			LocalDate past = LocalDate.of(2021, 9, 23);
-			
-			
-//			session.save(user0);
-//			session.save(user1);
-//			session.save(user2);
-//			session.save(user3);
-//			session.save(user4);
+
 			tx.commit();
-			
-			Note n0 = NotesDao.createNote("Chemical Kinetics", today, user0);
-			Note n1 = NotesDao.createNote("Quantum Chemistry", yest, user1);
-			Note n2 = NotesDao.createNote("Electrochemistry", today, user2);
-			Note n3 = NotesDao.createNote("Statistical Mechanics", past, user3);
-			Note n4 = NotesDao.createNote("Spectroscopy", today, user4);	
+			NotesDao note_dao = new NotesDao();
+			Note n0 = note_dao.createNote("Chemical Kinetics", today, user0);
+			Note n1 = note_dao.createNote("Quantum Chemistry", yest, user1);
+			Note n2 = note_dao.createNote("Electrochemistry", today, user2);
+			Note n3 = note_dao.createNote("Statistical Mechanics", past, user3);
+			Note n4 = note_dao.createNote("Spectroscopy", today, user4);	
 			
 		}
 		
@@ -142,6 +84,81 @@ public class NotesDao {
 	 * @param notebook
 	 */
 	public void deleteNote(String title, Notebook notebook) {
+		
+	}
+	
+	/* ==================== CREATING notes ====================  */
+
+	@Override
+	public Note createNote(String title, LocalDate creationDate, User user) {
+		 // Create a new Note instance
+		   
+	    Session session = SessionUtil.getSession();
+	    Note note = findNote(session,title);
+	    Note theNote = new Note();
+	    
+	    if(note == null) {
+	    	// Set Note properties
+	    	note = new Note(); // first instantiate it
+		    note.setTitle(title);
+		    note.setCreationDate(creationDate);
+		    note.setUser(user); // Associate the Note with the provided User
+
+		    // Save the Note to the database
+		    Transaction transaction = null;
+		    try {
+		        transaction = session.beginTransaction();
+
+		        // Assuming you have a Hibernate session available (session variable)
+		        System.out.println("saving user second time....");
+		        session.save(user);
+		        session.save(note);
+
+		        transaction.commit();
+		    } catch (Exception e) {
+		        if (transaction != null) {
+		            transaction.rollback();
+		        }
+		        e.printStackTrace(); // Handle the exception appropriately in your application
+		    }
+
+		    theNote = note;
+	    }else {
+	    	System.out.println("Note already existing!");
+	    	theNote = null; // use Logger class to log some message here...
+	    	
+	    }
+		return theNote; 
+		
+	} // END:: createNote(String title, LocalDate creationDate, User user)
+
+	@Override
+	public Note getNoteByTitle(String tito) {
+		Note n;
+		Transaction tr = null; // inactivate any active transactions
+		try(Session session = SessionUtil.getSession()){
+			tr = session.beginTransaction();
+			n = findNote(session, tito);
+			tr.commit();
+		}
+		return n;
+	} // END:: getNoteByTitle(String tito)
+
+	@Override
+	public Note getNoteById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateNoteTitle(String oldtitle, String newTitle) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteNoteByTitle(String title) {
+		// TODO Auto-generated method stub
 		
 	}
 	

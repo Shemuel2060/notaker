@@ -5,9 +5,9 @@
     <classes>
       <class name="com.arola.notaker.DaoTests.NoteDaoTests">
         <methods>
-          <include name="testPopulateNotes"/>
           <include name="shutDown"/>
           <include name="setUp"/>
+          <include name="testGetNoteByTitle"/>
         </methods>
       </class> <!-- com.arola.notaker.DaoTests.NoteDaoTests -->
     </classes>
