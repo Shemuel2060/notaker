@@ -1,11 +1,12 @@
 package com.arola.notaker.DaoTests;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 
 import java.time.LocalDate;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -34,23 +35,90 @@ public class NoteDaoTests {
 	
 	@Test
 	public void testCreateNote() {
-		User user = new User("Shemuel", "isaacnewton");
+		User user = new User("Aunt Jo", "josephineJos2999");
 		LocalDate today = LocalDate.now();
-		Note n = noteDao.createNote("Chemical Kinetics", today, user);
+		Note n = noteDao.createNote("Child Growth", today, user);
 		
 	} // END:: testCreateNote()
 	
+	
 	@Test
+	public void testCreateNote2() {
+		String contents = "Thermodynamics is a branch of physical chemistry "
+				+ "that deals with the study of energy and its transformations "
+				+ "in physical and chemical processes. It provides a framework "
+				+ "for understanding the principles governing the behavior of "
+				+ "matter and energy at the macroscopic level. The key concepts "
+				+ "in thermodynamics include energy, heat, work, temperature, "
+				+ "and the three laws of thermodynamics.";
+		
+		Note n = noteDao.createNote("Thermodynamics", LocalDate.now(), contents);
+		assertEquals(n.getContents().length(), contents.length());
+	}
+	
+	@Test // #1
 	public void testPopulateNotes() {
 		NotesDao.populateNotesData();
 	}
 	
-	@Test
+	@Test // #2
 	public void testGetNoteByTitle() {
 		Note n = noteDao.getNoteByTitle("Chemical Kinetics");
-		int userId = n.getNoteId();
-		assertEquals(userId,2);
-		System.out.println("Note got by title: \n"+n.toString());
+		int noteId = n.getNoteId();
+		assertEquals(noteId,2);
+	} // END:: testGetNoteByTitle() 
+	
+	@Test // #3
+	public void testGetNoteById() {
+		Note n = noteDao.getNoteById(2);
+		String noteTitle = n.getTitle();
+		assertEquals(noteTitle,"Chemical Kinetics");
+	} // END:: testGetNoteByTitle() 
+	
+	@Test // #4
+	public void testUpdateNoteTitle() {
+		
+		noteDao.updateNoteTitle("Java Data Programming","DB Management", LocalDate.now());
+		Note note = noteDao.getNoteByTitle("Java Data Programming");
+		assertNotNull(note.getTitle());
+	}
+	
+	@Test // #5
+	public void testeditNoteContent() {
+		String newContents = "Database design is a skill that involves "
+				+ "coming up with coherent Databases for managing a company's "
+				+ "data. It focuses on ensuring that data is consistent and  "
+				+ "all redundancies are avoided. The data should also be in  "
+				+ "highly integral relational tables that have coherent "
+				+ "mappings between them. Skills such are normalization, "
+				+ "and others are curcial in ensuring that this happens.";
+		
+		noteDao.editNoteContent("Database Design", newContents);
+		Note n = noteDao.getNoteByTitle("Database Design");
+		assertEquals(n.getContents().length(), newContents.length());
+	}
+	
+	@Test // #6
+	public void testDeleteNoteByTitle() {
+		Note n = noteDao.getNoteByTitle("Java Data Programming");
+		assertNotNull(n);
+		noteDao.deleteNoteByTitle("Java Data Programming");
+		System.out.println("\nTrying to retrieve note after deleting it\n");
+		n = noteDao.getNoteByTitle("Java Data Programming");
+		assertNull(n);
+		System.out.println("\n...Note successfully deleted...\n");
+	}
+	
+	@Test
+	public void testdeleteNoteContents() {
+		Note n = noteDao.getNoteByTitle("Java Data Programming");
+		String title = n.getTitle();
+		String contents = n.getContents();
+		
+		noteDao.deleteNoteContents(title, contents);
+		n = noteDao.getNoteByTitle("Java Data Programming");
+		assertNull(n.getContents());
+		
 	}
 
 } // END:: NoteDaoTests class

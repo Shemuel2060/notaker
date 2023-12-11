@@ -39,7 +39,7 @@ public class Note {
 	@Column(name="NOTE_TITLE")
 	private String title;
 	
-	@Column(name="NOTE_CONTENTS")
+	@Column(name="NOTE_CONTENTS",  columnDefinition = "LONGTEXT")
 	private String contents;
 	
 	@Column(name="NOTE_CREATIONDATE")
