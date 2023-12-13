@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [cornell-note-taking--desktop-app by groups]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="GRP-find-user,update-user(failed)">
+    <groups>
+      <run>
+        <include name="find-user"/>
+        <include name="update-user"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.arola.notaker.DaoTests.UserDaoTest">
+        <methods>
+          <include name="testFindUser"/>
+          <include name="testFindUserByName"/>
+        </methods>
+      </class> <!-- com.arola.notaker.DaoTests.UserDaoTest -->
+    </classes>
+  </test> <!-- GRP-find-user,update-user(failed) -->
+</suite> <!-- Failed suite [cornell-note-taking-desktop-app by groups] -->

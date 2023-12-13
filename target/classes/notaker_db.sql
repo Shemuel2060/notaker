@@ -16,6 +16,9 @@ SELECT * FROM reminders;
 SELECT * FROM tags;
 SELECT * FROM user;
 
+-- checking for size constraints
+SHOW CREATE TABLE arola_cornellnotaker.note;
+
 
 
 

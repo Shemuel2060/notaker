@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="master-suite">
+	<suite-files>
+	<suite-file path="./src/test/java/userDao-suite.xml"/>
+	<suite-file path="./src/test/java/notesDao-suite.xml"/>
+	<suite-file path="./src/test/java/notebookDao-suite.xml"/>
+	<suite-file path="./src/test/java/reminderDao-suite.xml"/>
+	<suite-file path="./src/test/java/tagDao-suite.xml"/>
+	</suite-files>
+</suite> <!-- Suite -->

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [userdao-suite]">
+  <test thread-count="5" name="userdao-functional Tests(failed)">
+    <groups>
+      <run>
+        <exclude name="delete-user"/>
+        <exclude name="setup"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.arola.notaker.DaoTests.UserDaoTest">
+        <methods>
+          <include name="testupdateUserName"/>
+        </methods>
+      </class> <!-- com.arola.notaker.DaoTests.UserDaoTest -->
+    </classes>
+  </test> <!-- userdao-functional Tests(failed) -->
+</suite> <!-- Failed suite [userdao-suite] -->

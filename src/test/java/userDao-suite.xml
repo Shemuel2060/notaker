@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite  name="userdao-suite">
+	<test name="userdao-functional Tests">
+
+		<groups>
+			<!-- include test groups to run -->
+			<run>
+				<inlcude name="create-user" />
+				<inlcude name="find-user" />
+				<inlcude name="update-user" />
+			</run>
+			<!-- exclude test groups that are not ready -->
+			<run>
+				<exclude name="delete-user" />
+				<exclude name="setup" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.arola.notaker.DaoTests.UserDaoTest" />
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->
