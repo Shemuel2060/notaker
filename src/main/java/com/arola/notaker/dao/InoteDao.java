@@ -3,6 +3,7 @@ package com.arola.notaker.dao;
 import java.time.LocalDate;
 
 import com.arola.notaker.entities.Note;
+import com.arola.notaker.entities.Reminder;
 import com.arola.notaker.entities.User;
 
 public interface InoteDao {
@@ -68,5 +69,17 @@ public interface InoteDao {
 	 * @param noteContents
 	 */
 	public void deleteNoteContents(String title, String noteContents);
+	
+	// OTHER METHODS...
+	
+	
+//	public Reminder getReminder(Note note);
+//	public void addReminder(Note note);
+//	public User getUser(Note note);
+//	public void addUser(Note note);
+//	public Sources getSources(Note note);
+//	public void addSources(Note note);
+//	public Tags getTags(Note note);
+//	public void addTags(Note note);
 
 }

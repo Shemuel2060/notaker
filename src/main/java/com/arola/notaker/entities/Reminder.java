@@ -1,6 +1,6 @@
 package com.arola.notaker.entities;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -21,13 +21,16 @@ import lombok.NoArgsConstructor;
 @Table(name ="REMINDERS")
 @Data
 @NoArgsConstructor
+
+@NamedQuery(name="reminder.deleteByDate", query="DELETE FROM Reminder r"
+		+ " WHERE r.reminderDate =:remDate")
 public class Reminder {
 	
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private int reminderId;
 	
 	@Column(name="REMINDER_DATE")
-	private Date reminderDate;
+	private LocalDate reminderDate;
 	
 	@ManyToOne(fetch=FetchType.LAZY, 
 			cascade= {CascadeType.PERSIST,
@@ -36,27 +39,6 @@ public class Reminder {
 	@JoinColumn(name="NOTE_ID")
 	private Note note; 
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST,
-			CascadeType.MERGE, CascadeType.REFRESH, 
-			CascadeType.DETACH})
-	private User user;
 	
-	/**
-	 * sets a remider for a given note
-	 * @param note
-	 * @param reminder
-	 */
-	public void setNoteReminder(Note note, Reminder reminder) {
-		
-	}
-	
-	/**
-	 * deletea a reminder for a given note...
-	 * @param note
-	 * @param reminder
-	 */
-	public void deleteNoteReminder(Note note, Reminder reminder) {
-		
-	}
 
 }

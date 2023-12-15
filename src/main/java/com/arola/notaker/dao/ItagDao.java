@@ -1,72 +1,58 @@
 package com.arola.notaker.dao;
 
-import java.time.LocalDate;
-
-import com.arola.notaker.entities.Note;
-import com.arola.notaker.entities.User;
+import com.arola.notaker.entities.Tag;
 
 public interface ItagDao {
 	
 	/**
-	 * Creates a note and persists it into the DB plus the 
-	 * user who created it and its creation date.
-	 * @param title
-	 * @param creationDate
-	 * @param user
-	 * @return the created note object
+	 * creates a Tag specifying the name of the Tag 
+	 * @param tagName
+	 * @return Tag object
 	 */
-	public Note createNote(String title, LocalDate creationDate, User user);
+	public Tag createTag(String tagName);
 	
 	/**
-	 * creates a note with a given title and content
-	 * @param title
-	 * @param creationDate
-	 * @return Note
+	 * retrieves a Tag object
+	 * @return Tag object
 	 */
-	public Note createNote(String title, LocalDate creationDate, String content);
+	public Tag getTagById(int id);
+	
+	/**
+	 * gets a tag by its name
+	 * @param name
+	 * @return Tag object
+	 */
+	public Tag getTagByName(String name);
 	
 	
 	/**
-	 * retrieves a Note object from the DB by its title.
-	 * @param tito
-	 * @return Note object
+	 * updates an existing Tag.
+	 * @param id 
+	 * @param newTagName
 	 */
-	public Note getNoteByTitle(String tito);
+	public void updateTagById(int id, String newTagName);
 	
 	/**
-	 * Retrieves a Note object from the DB by its id.
+	 * updates the name of an existing tag.
+	 * @param oldTagName
+	 * @param newTagName
+	 */
+	public void updateTagByName(String oldTagName, String newTagName);
+	/**
+	 * removes a Tag by its specified id.
 	 * @param id
-	 * @return
 	 */
-	public Note getNoteById(int id);
-	
-	
-	/**
-	 * updates the title of the note from the old title to 
-	 * the new title.
-	 * @param oldtitle
-	 * @param newTitle
-	 */
-	public void updateNoteTitle(String oldtitle, String newTitle, LocalDate date);
+	public void removeTagById(int id);
+
 	
 	/**
-	 * edits the contents of an existing note. It does not create
-	 * a note if the specified note by title does not exist.
-	 * @param title
-	 * @param newContent
+	 * removes a Tag by its specified name.
+	 * @param  name
 	 */
-	public void editNoteContent(String title, String newContent);
+	public void removeTagByName(String name);
 	
-	/**
-	 * Deletes a note by its title.
-	 * @param title
-	 */
-	public void deleteNoteByTitle(String title);
 	
-	/**
-	 * deletes contents of a note. 
-	 * @param noteContents
-	 */
-	public void deleteNoteContents(String title, String noteContents);
+	
+	// more methods on user notes, notebooks and Tags...
 
 }
