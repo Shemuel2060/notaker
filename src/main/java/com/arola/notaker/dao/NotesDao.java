@@ -18,10 +18,10 @@ public class NotesDao implements InoteDao {
 			Transaction tx = session.beginTransaction();
 
 			User user0 = new User("Shemuel", "isaacnewton");
-			User user1 = new User("Berith", "berithbuth");
-			User user2 = new User("Azurah", "az2019");
-			User user3 = new User("Iona", "i-preach-20");
-			User user4 = new User("Asahel", "weHomeHeaven2060");
+			User user1 = new User("Berith Milcah Katongole", "berithbuth");
+			User user2 = new User("Kizito Ibrahim", "kz2019");
+			User user3 = new User("Iona Katongole", "i-preach-20");
+			User user4 = new User("Asahel Katongole", "weHomeHeaven2060");
 
 			LocalDate today = LocalDate.now();
 			LocalDate yest = LocalDate.of(2022, 7, 14);
@@ -264,7 +264,5 @@ public class NotesDao implements InoteDao {
 	}
 
 
-
-	/* ==================== DELETING notes ==================== */
 
 }

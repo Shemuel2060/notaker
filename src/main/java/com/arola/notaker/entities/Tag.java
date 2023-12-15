@@ -42,14 +42,6 @@ public class Tag {
 		this.tagName = tagName;
 	}
 	
-	/**
-	 * assign a given tag to a given note...
-	 * @param tag
-	 * @param note
-	 */
-	public void assignTagToNote(Tag tag, Note note) {
-		
-	}
 	
 	
 	

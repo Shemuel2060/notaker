@@ -55,7 +55,7 @@ public class UserDao implements IuserDao {
 
 	@Override
 	public User createUser(String name) {
-		// Create a new Note instance
+		// Create a new User instance
 
 		Session session = SessionUtil.getSession();
 		User user = findUser(session, name);

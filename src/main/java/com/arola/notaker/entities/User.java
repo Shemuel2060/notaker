@@ -59,9 +59,6 @@ public class User {
 			mappedBy="user")
 	private List<Note> notes; // notes for a user
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL,
-			mappedBy="user")
-	private List<Reminder> reminders; // reminders for a user
 	/**
 	 * Create user with name and password fields only.
 	 * @param userName
