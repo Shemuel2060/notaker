@@ -22,7 +22,7 @@ public class TagDaoTests {
 	
 	@Test
 	public void testcreateTag() {		
-		Tag tag = tagDao.createTag("revisting chemistry");
+		Tag tag = tagDao.createTag("kingdom promises");
 		assertNotNull(tag);
 	}
 	

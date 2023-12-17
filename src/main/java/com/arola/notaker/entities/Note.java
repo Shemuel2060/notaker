@@ -26,7 +26,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="NOTE")
+@Table(name="NOTES")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor 
@@ -79,7 +79,7 @@ public class Note {
 					CascadeType.DETACH,CascadeType.MERGE, 
 					CascadeType.PERSIST,CascadeType.REFRESH
 			})
-    private List<Sources> referenced;
+    private List<Refs> referenced;
 
 	public Note(String title, LocalDate creationDate, User user) {
 		this.title = title;
