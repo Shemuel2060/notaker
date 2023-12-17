@@ -19,7 +19,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="USER")
+@Table(name="USERS")
 @Data
 @NoArgsConstructor
 @NamedQueries({

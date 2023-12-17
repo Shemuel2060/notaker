@@ -19,7 +19,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="NOTEBOOK")
+@Table(name="NOTEBOOKS")
 @Data
 @NoArgsConstructor
 public class Notebook {

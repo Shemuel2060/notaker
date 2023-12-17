@@ -18,11 +18,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="REFERENCE_SOURCES")
+@Table(name="REFS")
 @Data
 @NoArgsConstructor
-public class Sources {
-	
+public class Refs {
+
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
@@ -32,10 +32,25 @@ public class Sources {
 	@Column(name="URL")
 	private String  url;
 	
+	@Column(name="AUTHOR")
+	private String author; /*I more than one authors for a given
+							reference, take the main author.*/
+	
 	@OneToMany(fetch=FetchType.LAZY, cascade= {
 			CascadeType.DETACH,CascadeType.MERGE, 
 			CascadeType.PERSIST,CascadeType.REFRESH
 	})
 	private List<Note> notes;
+	
+	public Refs(String author, String refName) {
+		this.author = author;
+		this.title = refName;
+	}
+
+	public Refs(String author, String refTitle, String url) {
+		this.author = author;
+		this.title = refTitle;
+		this.url = url;
+	}
 
 }

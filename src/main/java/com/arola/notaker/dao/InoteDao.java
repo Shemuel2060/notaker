@@ -77,7 +77,7 @@ public interface InoteDao {
 //	public void addReminder(Note note);
 //	public User getUser(Note note);
 //	public void addUser(Note note);
-//	public Sources getSources(Note note);
+//	public Refs getSources(Note note);
 //	public void addSources(Note note);
 //	public Tags getTags(Note note);
 //	public void addTags(Note note);
