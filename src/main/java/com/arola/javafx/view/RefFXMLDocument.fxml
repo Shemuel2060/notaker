@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding='UTF-8'?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="RefFXMLDocumentController"
+    alignment="CENTER" vgap="10" hgap="10">
+
+    <padding>
+        <inset top="25" bottom="25" left="25" right="25"/>
+    </padding>
+
+    <!-- Input fields for Author, Title, and URL -->
+    <Label text="Author:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="authorField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+    <Label text="Title:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField fx:id="titleField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+    <Label text="URL:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <TextField fx:id="urlField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+    <!-- Add reference button -->
+    <Button text="Add Reference" onAction="#addReference" GridPane.rowIndex="3" GridPane.columnSpan="2"/>
+</GridPane>

@@ -7,6 +7,7 @@ import org.hibernate.cfg.Configuration;
 import com.arola.notaker.entities.Note;
 import com.arola.notaker.entities.Notebook;
 import com.arola.notaker.entities.Reminder;
+import com.arola.notaker.entities.Summary;
 import com.arola.notaker.entities.Refs;
 import com.arola.notaker.entities.Tag;
 import com.arola.notaker.entities.User;
@@ -24,6 +25,7 @@ public class SessionUtil {
             		.addAnnotatedClass(Tag.class)
             		.addAnnotatedClass(Reminder.class)
             		.addAnnotatedClass(Refs.class)
+            		.addAnnotatedClass(Summary.class)
             		.buildSessionFactory();
         } catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed
