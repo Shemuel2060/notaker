@@ -1,27 +1,26 @@
-<?xml version="1.0" encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
 
+
+<?xml-model href=""?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="RefFXMLDocumentController"
-    alignment="CENTER" vgap="10" hgap="10">
+	fx:controller="com.arola.notaker.controllers.RefFXMLDocumentController"
+	alignment="CENTER" hgap="30" vgap="20">
+	<!-- <padding> <insets top="25" bottom="25" left="25" right="25" /> </padding> -->
+	<Label GridPane.rowIndex="0" text="Add Reference" GridPane.columnSpan="2"/>
+	
+	<Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="Title:" />
+	<TextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="titleTextField" />
 
-    <padding>
-        <inset top="25" bottom="25" left="25" right="25"/>
-    </padding>
+	<Label GridPane.rowIndex="2" GridPane.columnIndex="0" text="Reference URL:" />
+	<TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="urlTextField" />
 
-    <!-- Input fields for Author, Title, and URL -->
-    <Label text="Author:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-    <TextField fx:id="authorField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+	<Label GridPane.rowIndex="3" GridPane.columnIndex="0" text="Author:" />
+	<TextField GridPane.rowIndex="3" GridPane.columnIndex="1" fx:id="authorTextField" />
 
-    <Label text="Title:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-    <TextField fx:id="titleField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-
-    <Label text="URL:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-    <TextField fx:id="urlField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-
-    <!-- Add reference button -->
-    <Button text="Add Reference" onAction="#addReference" GridPane.rowIndex="3" GridPane.columnSpan="2"/>
+	<Button GridPane.rowIndex="4" GridPane.columnIndex="1" text="Add Reference" onAction="#addReference" />
 </GridPane>

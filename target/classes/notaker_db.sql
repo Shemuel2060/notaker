@@ -15,6 +15,7 @@ SELECT * FROM refs_notes;
 SELECT * FROM reminders;
 SELECT * FROM tags;
 SELECT * FROM users;
+SELECT * FROM summary;
 
 
 -- disable safe update model
