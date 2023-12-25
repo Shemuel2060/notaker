@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+	xmlns:fx="http://javafx.com/fxml" prefWidth="800" prefHeight="600"
+	fx:id="root"
+	fx:controller="com.arola.notaker.controllers.MainFXMLDocumentController"
+	stylesheets="/styles/mainView.css" styleClass="root">
+	<padding>
+		<Insets top="10" right="10" bottom="20" left="20" />
+	</padding>
+
+	<!-- Top HBox -->
+	<top>
+		<HBox prefHeight="50" spacing="20">
+			<Label text="Sampling top" textFill="#31ebfc" fx:id="nameLabel" />
+			<Text fx:id="currentNoteUser">
+				<font>
+					<Font size="14.0" />
+				</font>
+			</Text> <!-- dynamic text indicating note user -->
+			<Text fx:id="currentNoteTitle">
+				<font>
+					<Font size="14.0" />
+				</font>
+			</Text> <!-- dynamic text indicating current note -->
+			<!-- ToggleButton for Theme Switching -->
+			<ToggleButton fx:id="themeToggleButton"
+				text="Change Theme" onAction="#toggleTheme">
+
+			</ToggleButton>
+		</HBox>
+	</top>
+
+	<!-- Left VBox -->
+	<left>
+		<VBox prefWidth="300" prefHeight="400" spacing="20">
+			<TextField fx:id="searchField" promptText="Search..."
+				maxWidth="200" styleClass="type-area">
+				<font>
+					<Font size="14.0" />
+				</font>
+			</TextField>
+			<Button fx:id="newNotebook" text="New Notebook"
+				onAction="#addNotebook">
+				<font>
+					<Font size="14.0" />
+				</font>
+				<graphic>
+					<ImageView fitHeight="15.0" fitWidth="15.0"
+						pickOnBounds="true" preserveRatio="true">
+						<image>
+							<Image url="@/images_icons/plus-icon.png" />
+						</image>
+					</ImageView>
+				</graphic>
+			</Button>
+			<Button fx:id="newNote" text="New Note" onAction="#addNote">
+				<font>
+					<Font size="14.0" />
+				</font>
+				<graphic>
+					<ImageView fitHeight="15.0" fitWidth="15.0"
+						pickOnBounds="true" preserveRatio="true">
+						<image>
+							<Image url="@/images_icons/plus-icon.png" />
+						</image>
+					</ImageView>
+				</graphic>
+			</Button>
+			<!-- print button -->
+			<Button fx:id="newNote" text="Print">
+				<font>
+					<Font size="14.0" />
+				</font>
+				<graphic>
+					<ImageView fitHeight="15.0" fitWidth="15.0"
+						pickOnBounds="true" preserveRatio="true">
+						<image>
+							<Image url="@/images_icons/print-icon.png" />
+						</image>
+					</ImageView>
+				</graphic>
+			</Button>
+
+			<Separator />
+
+			<!-- cue section -->
+			<ScrollPane>
+				<TextArea wrapText="true" fx:id="cueContents"
+					promptText="have your queries, thoughts and ideas here..."
+					prefWidth="300" prefHeight="350">
+
+				</TextArea>
+			</ScrollPane>
+
+		</VBox>
+
+	</left>
+
+	<!-- Center ScrollPane with TextArea -->
+	<center>
+		<VBox prefWidth="600" prefHeight="800" spacing="10">
+			<GridPane hgap="20">
+				<ImageView fitWidth="20" fitHeight="20"
+					GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="hovered">
+					<Image url="@/images_icons/clock-icon.png" />
+				</ImageView>
+				<Label text="Created: " GridPane.rowIndex="0"
+					GridPane.columnIndex="1">
+					<font>
+						<Font size="14.0" />
+					</font>
+				</Label>
+				<Text fx:id="creationDate" GridPane.rowIndex="0"
+					GridPane.columnIndex="2">
+					<font>
+						<Font size="14.0" />
+					</font>
+				</Text> <!-- dynamic creation date -->
+			</GridPane>
+			<!-- the tags -->
+			<GridPane xmlns="http://javafx.com/javafx/1" hgap="20"
+				styleClass="aligned">
+				<ImageView fitWidth="20" fitHeight="20"
+					GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="hovered">
+					<Image url="@/images_icons/menu-icon.png" />
+				</ImageView>
+				<Label text="Tags: " GridPane.rowIndex="1"
+					GridPane.columnIndex="1">
+					<font>
+						<Font size="14.0" />
+					</font>
+				</Label>
+				<TextField fx:id="tags" onAction="#addTags"
+					GridPane.rowIndex="1" GridPane.columnIndex="2" styleClass="tag-ref"
+					promptText="Add tags">
+					<font>
+						<Font size="14.0" style="bold" />
+					</font>
+				</TextField> <!-- dynamic creation date -->
+			</GridPane>
+			<!-- the references -->
+			<GridPane xmlns="http://javafx.com/javafx/1" hgap="20"
+				styleClass="aligned">
+
+				<ImageView fitWidth="20" fitHeight="20"
+					GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="hovered">
+					<Image url="@/images_icons/menu-icon.png" />
+				</ImageView>
+				<Label text="References: " GridPane.rowIndex="2"
+					GridPane.columnIndex="1">
+					<font>
+						<Font size="14.0" />
+					</font>
+				</Label>
+				<TextField fx:id="refs" onAction="#addRefs"
+					GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="tag-ref"
+					promptText="Add references">
+					<font>
+						<Font size="14.0" style="bold" />
+					</font>
+				</TextField> <!-- dynamic creation date -->
+			</GridPane>
+
+			<GridPane xmlns="http://javafx.com/javafx/1" hgap="20"
+				styleClass="aligned">
+				<ImageView fitWidth="20" fitHeight="20"
+					GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="hovered">
+					<Image url="@/images_icons/clock-icon.png" />
+				</ImageView>
+				<Label text="Last Modified: " GridPane.rowIndex="3"
+					GridPane.columnIndex="1">
+					<font>
+						<Font size="14.0" />
+					</font>
+				</Label>
+				<Text fx:id="dynamicText" GridPane.rowIndex="3"
+					GridPane.columnIndex="2">
+					<font>
+						<Font size="14.0" />
+					</font>
+				</Text> <!-- dynamic creation date -->
+			</GridPane>
+			<Separator />
+			<GridPane xmlns="http://javafx.com/javafx/1"
+				styleClass="aligned">
+				<TextField fx:id="comment" GridPane.rowIndex="4"
+					promptText="Add a comment" GridPane.columnIndex="0"
+					GridPane.columnSpan="3">
+					<font>
+						<Font size="14.0" />
+					</font>
+				</TextField> <!-- dynamic creation date -->
+			</GridPane>
+			<Separator />
+			<ScrollPane VBox.vgrow="ALWAYS">
+
+				<content>
+					<TextArea prefWidth="1000" prefHeight="470"
+						wrapText="true" promptText="Type notes here..." />
+				</content>
+			</ScrollPane>
+		</VBox>
+
+	</center>
+
+
+
+	<!-- Bottom ScrollPane with TextArea -->
+	<bottom>
+		<Label text="SUMMARY">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</Label>
+		<ScrollPane>
+			<content>
+				<TextArea prefWidth="1300" prefHeight="200" wrapText="true"
+					promptText="Type summary here..." />
+			</content>
+		</ScrollPane>
+	</bottom>
+
+</BorderPane>

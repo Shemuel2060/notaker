@@ -1,6 +1,6 @@
 package com.arola.javafx.view;
 
-import com.arola.notaker.controllers.NotesFXMLDocumentController;
+import com.arola.notaker.controllers.MainFXMLDocumentController;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,16 +8,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;	
 
-public class NoteView extends Application {
+public class MainView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load the FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("NoteFXMLDocument.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainFXMLDocument.fxml"));
         Parent root = loader.load();
 
         // Set the controller for the FXML file
-        NotesFXMLDocumentController controller = loader.getController();
+        MainFXMLDocumentController controller = loader.getController();
 
         // Set up the scene
         Scene scene = new Scene(root, 1000, 800);

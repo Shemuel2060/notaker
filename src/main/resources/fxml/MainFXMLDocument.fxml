@@ -8,9 +8,13 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
-	xmlns:fx="http://javafx.com/fxml" prefWidth="800" prefHeight="600">
+	xmlns:fx="http://javafx.com/fxml" prefWidth="800" prefHeight="600"
+	fx:id="root"
+	fx:controller="com.arola.notaker.controllers.MainFXMLDocumentController"
+	stylesheets="/styles/mainView.css" styleClass="root">
 	<padding>
 		<Insets top="10" right="10" bottom="20" left="20" />
 	</padding>
@@ -18,7 +22,8 @@
 	<!-- Top HBox -->
 	<top>
 		<HBox prefHeight="50" spacing="20">
-			<Label text="Sampling top" />
+			<Label text="Sampling top"	textFill="#31ebfc" 
+			fx:id="nameLabel"/>
 			<Text fx:id="currentNoteUser">
 				<font>
 					<Font size="14.0" />
@@ -29,6 +34,11 @@
 					<Font size="14.0" />
 				</font>
 			</Text> <!-- dynamic text indicating current note -->
+			<!-- ToggleButton for Theme Switching -->
+			<ToggleButton fx:id="themeToggleButton"
+				text="Change Theme" onAction="#toggleTheme">
+
+			</ToggleButton>
 		</HBox>
 	</top>
 
@@ -36,7 +46,7 @@
 	<left>
 		<VBox prefWidth="300" prefHeight="400" spacing="20">
 			<TextField fx:id="searchField" promptText="Search..."
-				maxWidth="200">
+				maxWidth="200" styleClass="type-area">
 				<font>
 					<Font size="14.0" />
 				</font>
@@ -54,7 +64,7 @@
 					</ImageView>
 				</graphic>
 			</Button>
-			<Button fx:id="newNote" text="New Note">
+			<Button fx:id="newNote" text="New Note" onAction="#addNote">
 				<font>
 					<Font size="14.0" />
 				</font>
@@ -82,7 +92,7 @@
 				</graphic>
 			</Button>
 
-			<Separator/>
+			<Separator />
 
 			<!-- cue section -->
 			<ScrollPane>
@@ -109,7 +119,7 @@
 						<Font size="14.0" />
 					</font>
 				</Label>
-				<Text fx:id="dynamicText">
+				<Text fx:id="creationDate">
 					<font>
 						<Font size="14.0" />
 					</font>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<?xml-model href=""?>
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.arola.notaker.controllers.AddNoteController"
+	spacing="20" prefWidth="300" prefHeight="200" alignment="CENTER"
+	stylesheets="/styles/mainView.css" styleClass="note-view">
+
+	<HBox spacing="20">
+		<Label text="Title: " />
+		<TextField fx:id="noteTitle" promptText="Note title"
+			maxWidth="200" styleClass="type-area">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</TextField>
+	</HBox>
+
+	<HBox>
+		<Label text="Owner:  " />
+		<TextField fx:id="noteOwner" promptText="Your name..."
+			maxWidth="200" styleClass="type-area">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</TextField>
+	</HBox>
+
+
+	<Button text="Add Note" onAction="#addNote" fx:id="button">
+		<font>
+			<Font size="18.0" />
+		</font>
+	</Button>
+</VBox>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<?xml-model href=""?>
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.arola.notaker.controllers.AddNotebookController"
+	spacing="20" prefWidth="300" prefHeight="200" alignment="CENTER"
+	stylesheets="/styles/mainView.css" styleClass="note-view">
+
+	<HBox spacing="20">
+		<Label text="Notebook: " />
+		<TextField fx:id="notebookTitle" promptText="Note book name"
+			maxWidth="200" styleClass="type-area">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</TextField>
+	</HBox>
+
+	<HBox>
+		<Label text="Description:  " />
+		<TextField fx:id="description" promptText="Short description..."
+			maxWidth="200" styleClass="type-area">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</TextField>
+	</HBox>
+
+	<Button text="Add Note Book" onAction="#addNotebook" fx:id="button">
+		<font>
+			<Font size="18.0" />
+		</font>
+	</Button>
+</VBox>

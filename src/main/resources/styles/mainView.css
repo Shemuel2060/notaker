@@ -1,0 +1,48 @@
+
+
+
+.root{
+	-fx-background-color: #7cafc2;
+}
+
+.label{
+	-fx-font-weight: BOLD;
+}
+.type-area{
+	-fx-border-radius: 40.0px;
+	-fx-color:#000;
+}
+
+.note-view{
+	-fx-background-color: #7cafc2;
+}
+
+.hovered{
+	-fx-cursor: hand;
+	
+}
+
+.tag-ref{
+	-fx-background-color: #7cafc2;
+	-fx-text-fill: white;
+}
+.tag-ref:hover{
+	-fx-background-color: rgba(192.0, 192.0, 192.0, 0.5); /* Light gray with 50% transparency */
+    -fx-padding: 5.0px;
+    -fx-border-radius: 20px;
+    -fx-outline: none;
+}
+
+.aligned{
+	
+}
+
+
+
+
+
+
+
+
+
+
