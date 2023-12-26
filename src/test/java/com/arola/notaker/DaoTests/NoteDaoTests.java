@@ -37,23 +37,17 @@ public class NoteDaoTests {
 	public void testCreateNote() {
 		User user = new User("Aunt Jo", "josephineJos2999");
 		LocalDate today = LocalDate.now();
-		Note n = noteDao.createNote("Child Growth", today, user);
+		Note n = noteDao.createNote("The Beast Proved", today, user);
 		
 	} // END:: testCreateNote()
 	
 	
 	@Test
 	public void testCreateNote2() {
-		String contents = "Thermodynamics is a branch of physical chemistry "
-				+ "that deals with the study of energy and its transformations "
-				+ "in physical and chemical processes. It provides a framework "
-				+ "for understanding the principles governing the behavior of "
-				+ "matter and energy at the macroscopic level. The key concepts "
-				+ "in thermodynamics include energy, heat, work, temperature, "
-				+ "and the three laws of thermodynamics.";
+		String userName = "Azurah";
 		
-		Note n = noteDao.createNote("Thermodynamics", LocalDate.now(), contents);
-		assertEquals(n.getContents().length(), contents.length());
+		Note n = noteDao.createNote("Kinetics", LocalDate.now(), userName);
+		assertEquals(n.getUser().getUserName().length(), userName.length());
 	}
 	
 	@Test // #1

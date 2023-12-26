@@ -8,13 +8,13 @@ USE arola_cornellnotaker;
 
 -- CRUD OPERATIONS
 SELECT * FROM notes;
+SELECT * FROM users;
 SELECT * FROM notebooks;
 SELECT * FROM note_tags;
 SELECT * FROM refs;
 SELECT * FROM refs_notes;
 SELECT * FROM reminders;
 SELECT * FROM tags;
-SELECT * FROM users;
 SELECT * FROM summary;
 
 

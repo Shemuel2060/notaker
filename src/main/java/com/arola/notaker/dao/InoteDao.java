@@ -10,7 +10,10 @@ public interface InoteDao {
 	
 	/**
 	 * Creates a note and persists it into the DB plus the 
-	 * user who created it and its creation date.
+	 * user who created it and its creation date. If user
+	 * already exists, add note to the user without saving
+	 * the user again, otherwise, save both the note and
+	 * the user for the first time.
 	 * @param title
 	 * @param creationDate
 	 * @param user
@@ -19,12 +22,20 @@ public interface InoteDao {
 	public Note createNote(String title, LocalDate creationDate, User user);
 	
 	/**
-	 * creates a note with a given title and content
+	 * Creates a note and persists it into the DB plus the 
+	 * user who created it and its creation date. If user
+	 * already exists, add note to the user without saving
+	 * the user again, otherwise, save both the note and
+	 * the user for the first time.
 	 * @param title
 	 * @param creationDate
-	 * @return Note
+	 * @param user
+	 * @return the created note object
 	 */
-	public Note createNote(String title, LocalDate creationDate, String content);
+	public Note createNote(String title, LocalDate creationDate, String userName);
+	
+	
+	
 	
 	
 	/**

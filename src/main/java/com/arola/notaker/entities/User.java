@@ -68,6 +68,10 @@ public class User {
 		this.userName = userName;
 		this.password = password;
 	}
+
+	public User(String userName) {
+		this.userName = userName;
+	}
 	
 	
 	

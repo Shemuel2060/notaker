@@ -3,12 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.arola.notaker.DaoTests.SummaryDaoTests">
+      <class name="com.arola.notaker.DaoTests.NoteDaoTests">
         <methods>
-          <include name="testPopulateRefsData"/>
-          <include name="testgetSummaryById"/>
+          <include name="shutDown"/>
+          <include name="setUp"/>
+          <include name="testCreateNote2"/>
         </methods>
-      </class> <!-- com.arola.notaker.DaoTests.SummaryDaoTests -->
+      </class> <!-- com.arola.notaker.DaoTests.NoteDaoTests -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

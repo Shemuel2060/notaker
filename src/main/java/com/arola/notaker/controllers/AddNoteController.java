@@ -42,12 +42,10 @@ public class AddNoteController {
 			String dated = date.toString();
 
 			// get input for note owner name
-			String owner = noteOwner.getText();
-			User user = new User();
-			user.setUserName(owner);
+			String ownerName = noteOwner.getText();
 			
 
-			System.out.println("DEBUGGING POINT--> NAME: " + owner);
+			System.out.println("DEBUGGING POINT--> NAME: " + ownerName);
 
 			// invoke the method to display the name in main controller
 			
@@ -56,7 +54,7 @@ public class AddNoteController {
 			NotesDao notesDao = new NotesDao();
 			// get note title input
 			String title = noteTitle.getText();
-			notesDao.createNote(title, LocalDate.now(), user);
+			notesDao.createNote(title, LocalDate.now(), ownerName);
 		
 			
 			System.out.println("Note title: "+title);
