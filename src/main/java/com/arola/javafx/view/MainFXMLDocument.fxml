@@ -92,7 +92,7 @@
 				</graphic>
 			</Button>
 
-			<Separator />
+
 
 			<!-- cue section -->
 			<ScrollPane>
@@ -141,13 +141,15 @@
 						<Font size="14.0" />
 					</font>
 				</Label>
-				<TextField fx:id="tags" onAction="#addTags"
+				<TextField fx:id="tags" onAction="#handleaddTags"
 					GridPane.rowIndex="1" GridPane.columnIndex="2" styleClass="tag-ref"
 					promptText="Add tags">
 					<font>
 						<Font size="14.0" style="bold" />
 					</font>
+
 				</TextField> <!-- dynamic creation date -->
+
 			</GridPane>
 			<!-- the references -->
 			<GridPane xmlns="http://javafx.com/javafx/1" hgap="20"

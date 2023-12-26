@@ -1,10 +1,5 @@
 package com.arola.notaker.dao;
 
-import static org.testng.Assert.assertEquals;
-
-import java.util.List;
-import java.util.Map;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -27,8 +22,7 @@ public class NotebookDao {
 	 * @param description
 	 * @return created notebook
 	 */
-	public static Notebook createSingleNotebook(Session session, 
-			String title, String description) {
+	public static Notebook createSingleNotebook(String title, String description) {
 		
 		
 			Transaction tr = session.beginTransaction();
@@ -104,13 +98,13 @@ public class NotebookDao {
 	public static void populateNotebooks() {
 		session.beginTransaction();
 		
-		Notebook nb1 = NotebookDao.createSingleNotebook(session, "Physics", "starter physics");
-		Notebook nb2 = NotebookDao.createSingleNotebook(session, "Mathematics", "calculus maths");
-		Notebook nb3 = NotebookDao.createSingleNotebook(session, "Chemical Kinetics", 
+		Notebook nb1 = NotebookDao.createSingleNotebook("Physics", "starter physics");
+		Notebook nb2 = NotebookDao.createSingleNotebook("Mathematics", "calculus maths");
+		Notebook nb3 = NotebookDao.createSingleNotebook("Chemical Kinetics", 
 				"molecular kinetics");
-		Notebook nb4 = NotebookDao.createSingleNotebook(session, "Electrochem", 
+		Notebook nb4 = NotebookDao.createSingleNotebook("Electrochem", 
 				"molecular electrochemistry");
-		Notebook nb5 = NotebookDao.createSingleNotebook(session, 
+		Notebook nb5 = NotebookDao.createSingleNotebook(
 				"organic biomolecules", "organic chemicals of life");
 		
 		session.save(nb1);

@@ -3,6 +3,8 @@ package com.arola.notaker.controllers;
 import java.net.URL;
 import java.time.LocalDate;
 
+import com.arola.notaker.dao.NotebookDao;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,12 +30,9 @@ public class AddNotebookController {
 
 		try {
 			// get controller of the main view
-			URL fxmlLocation = getClass().getResource("/com/arola/javafx/view/MainFXMLDocument.fxml");
-			FXMLLoader loader = new FXMLLoader(fxmlLocation);
-
-			System.out.println(fxmlLocation);
-			MainFXMLDocumentController main = loader.getController();
-			Parent root = loader.load();
+			
+			
+		
 
 			// Get the stage
 			Stage stage = (Stage) button.getScene().getWindow();
@@ -43,9 +42,15 @@ public class AddNotebookController {
 
 
 			// invoke the method to display the name in main controller
-			main.displayOwnerName(owner);
+			
 
+			// get inputs
+			String notebookName = notebookTitle.getText();
+			String desc = description.getText();
+			
 			// persist note title to DB
+			NotebookDao.createSingleNotebook(notebookName, desc);
+			
 			System.out.println("Note Title saved in DB");
 
 			// close stage after persisting notebook title and description to DB
