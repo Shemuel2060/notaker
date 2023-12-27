@@ -4,10 +4,13 @@ import java.net.URL;
 import java.time.LocalDate;
 
 import com.arola.notaker.dao.NotebookDao;
+import com.arola.notaker.entities.Notebook;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -49,7 +52,20 @@ public class AddNotebookController {
 			String desc = description.getText();
 			
 			// persist note title to DB
-			NotebookDao.createSingleNotebook(notebookName, desc);
+			NotebookDao notebookDAO = new NotebookDao();
+			Notebook created = notebookDAO.createNotebook(notebookName, desc);
+			if(created==null) {
+				 // Create a new alert
+		        Alert alert = new Alert(AlertType.INFORMATION);
+
+		        // Set the title and content text
+		        alert.setTitle("Info");
+		        alert.setHeaderText(null); // No header
+		        alert.setContentText(notebookName.toUpperCase()+ " already exists!");
+
+		        // Show the alert
+		        alert.showAndWait();
+			}
 			
 			System.out.println("Note Title saved in DB");
 

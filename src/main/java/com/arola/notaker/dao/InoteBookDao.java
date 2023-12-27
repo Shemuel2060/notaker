@@ -1,72 +1,36 @@
 package com.arola.notaker.dao;
 
-import java.time.LocalDate;
-
-import com.arola.notaker.entities.Note;
-import com.arola.notaker.entities.User;
+import com.arola.notaker.entities.Notebook;
 
 public interface InoteBookDao {
 	
 	/**
-	 * Creates a note and persists it into the DB plus the 
-	 * user who created it and its creation date.
+	 * checks if notebook exists using its title and the findNote(). 
+	 * If existing, prints out that it already exists, otherwise
+	 * creates it.
 	 * @param title
-	 * @param creationDate
-	 * @param user
-	 * @return the created note object
+	 * @param description
+	 * @return Notebook object
 	 */
-	public Note createNote(String title, LocalDate creationDate, User user);
+	public Notebook createNotebook(String title, String description);
 	
 	/**
-	 * creates a note with a given title and content
+	 *Finds a notebook by its title. If exists, returns the 
+	 *notebook; otherwise returns null
+	 * 
 	 * @param title
-	 * @param creationDate
-	 * @return Note
+	 * @return Notebook object or null
 	 */
-	public Note createNote(String title, LocalDate creationDate, String content);
-	
+	public Notebook findNotebook(String title);
 	
 	/**
-	 * retrieves a Note object from the DB by its title.
-	 * @param tito
-	 * @return Note object
-	 */
-	public Note getNoteByTitle(String tito);
-	
-	/**
-	 * Retrieves a Note object from the DB by its id.
-	 * @param id
-	 * @return
-	 */
-	public Note getNoteById(int id);
-	
-	
-	/**
-	 * updates the title of the note from the old title to 
-	 * the new title.
+	 * checks if notebook exists, and if so, updates its
+	 * title, otherwise, messages that note does not exist.
 	 * @param oldtitle
-	 * @param newTitle
+	 * @param newtitle
 	 */
-	public void updateNoteTitle(String oldtitle, String newTitle, LocalDate date);
+	public void updateNotebook(String oldtitle, String newtitle);
 	
-	/**
-	 * edits the contents of an existing note. It does not create
-	 * a note if the specified note by title does not exist.
-	 * @param title
-	 * @param newContent
-	 */
-	public void editNoteContent(String title, String newContent);
-	
-	/**
-	 * Deletes a note by its title.
-	 * @param title
-	 */
-	public void deleteNoteByTitle(String title);
-	
-	/**
-	 * deletes contents of a note. 
-	 * @param noteContents
-	 */
-	public void deleteNoteContents(String title, String noteContents);
+	public void deleteNotebook(String title);
 
 }
