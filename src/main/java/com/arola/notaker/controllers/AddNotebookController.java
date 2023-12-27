@@ -1,20 +1,13 @@
 package com.arola.notaker.controllers;
 
-import java.net.URL;
-import java.time.LocalDate;
-
 import com.arola.notaker.dao.NotebookDao;
 import com.arola.notaker.entities.Notebook;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class AddNotebookController {

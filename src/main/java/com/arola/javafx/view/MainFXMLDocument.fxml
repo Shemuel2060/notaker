@@ -45,7 +45,7 @@
 	<left>
 		<VBox prefWidth="300" prefHeight="400" spacing="20">
 			<TextField fx:id="searchField" promptText="Search..."
-				maxWidth="200" styleClass="type-area">
+				maxWidth="200" styleClass="empty-textField, textfields">
 				<font>
 					<Font size="14.0" />
 				</font>
@@ -142,10 +142,11 @@
 					</font>
 				</Label>
 				<TextField fx:id="tags" onAction="#handleaddTags"
-					GridPane.rowIndex="1" GridPane.columnIndex="2" styleClass="tag-ref"
-					promptText="Add tags">
+					GridPane.rowIndex="1" GridPane.columnIndex="2" 
+					styleClass="empty-textField,textfields"
+					promptText="Add tags" >
 					<font>
-						<Font size="14.0" style="bold" />
+						<Font size="14.0" />
 					</font>
 
 				</TextField> <!-- dynamic creation date -->
@@ -166,10 +167,11 @@
 					</font>
 				</Label>
 				<TextField fx:id="refs" onAction="#addRefs"
-					GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="tag-ref"
+					GridPane.rowIndex="2" GridPane.columnIndex="2" 
+					styleClass="empty-textField,textfields"
 					promptText="Add references">
 					<font>
-						<Font size="14.0" style="bold" />
+						<Font size="14.0" />
 					</font>
 				</TextField> <!-- dynamic creation date -->
 			</GridPane>
@@ -198,7 +200,7 @@
 				styleClass="aligned">
 				<TextField fx:id="comment" GridPane.rowIndex="4"
 					promptText="Add a comment" GridPane.columnIndex="0"
-					GridPane.columnSpan="3">
+					GridPane.columnSpan="3" styleClass="empty-textField,textfields">
 					<font>
 						<Font size="14.0" />
 					</font>
