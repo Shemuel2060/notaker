@@ -24,6 +24,7 @@
     -fx-border-width: 0;
     -fx-border-color: transparent;
     -fx-prompt-text-fill: white;
+    -fx-font-style: italic;
     -fx-text-fill: white; /* Adjust text color as needed */
 }
 .textfields:hover{
