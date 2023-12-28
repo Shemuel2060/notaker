@@ -7,8 +7,25 @@
 
 .label{
 	-fx-font-weight: BOLD;
+	-fx-text-fill:white;
 }
 
+.top-labels{
+	-fx-font-weight: BOLD;
+	 -fx-font-size: 15px;	
+}
+
+.top-labels:hover{
+	-fx-font-weight: BOLD;
+	 -fx-font-size: 18px;	
+	 -fx-cursor: hand;
+}
+
+.dates{
+	-fx-text-fill:white;
+	-fx-font-weight: BOLD;
+	 -fx-font-size: 14px;	
+}
 
 .note-view{
 	-fx-background-color: #7cafc2;

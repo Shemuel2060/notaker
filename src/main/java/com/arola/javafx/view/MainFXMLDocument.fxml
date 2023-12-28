@@ -24,9 +24,9 @@
 		<HBox prefHeight="50" spacing="20">
 		<!-- Menu icons for saving, opening notes -->
 		
-			<Label text="" textFill="#31ebfc" fx:id="nameLabel" />
-			<Label text="" textFill="#31ebfc" fx:id="currentNotebookName" />
-			<Label text="" textFill="#31ebfc" fx:id="currentNoteTitle" />
+			<Label text="" textFill="#31ebfc" fx:id="nameLabel" styleClass="top-labels"/>
+			<Label text="" textFill="#31ebfc" fx:id="currentNotebookName" styleClass="top-labels" />
+			<Label text="" textFill="#31ebfc" fx:id="currentNoteTitle" styleClass="top-labels"/>
 			
 			<!-- ToggleButton for Theme Switching -->
 			<ToggleButton fx:id="themeToggleButton"
@@ -117,11 +117,7 @@
 					</font>
 				</Label>
 				<Text fx:id="creationDate" GridPane.rowIndex="0"
-					GridPane.columnIndex="2">
-					<font>
-						<Font size="14.0" />
-					</font>
-				</Text> <!-- dynamic creation date -->
+					GridPane.columnIndex="2" styleClass="dates"/> <!-- dynamic creation date -->
 			</GridPane>
 			<!-- the tags -->
 			<GridPane xmlns="http://javafx.com/javafx/1" hgap="20"
@@ -184,11 +180,7 @@
 					</font>
 				</Label>
 				<Text fx:id="dynamicText" GridPane.rowIndex="3"
-					GridPane.columnIndex="2">
-					<font>
-						<Font size="14.0" />
-					</font>
-				</Text> <!-- dynamic creation date -->
+					GridPane.columnIndex="2" styleClass="dates"/> <!-- dynamic creation date -->
 			</GridPane>
 			<Separator />
 			<GridPane xmlns="http://javafx.com/javafx/1"
