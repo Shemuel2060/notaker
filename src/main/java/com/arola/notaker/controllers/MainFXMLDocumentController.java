@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -64,7 +65,6 @@ public class MainFXMLDocumentController implements Initializable {
 		System.out.println("DEBUGGING POINT --> " + "MainFXMLDocumentController initialized!!");
 
 		// initialization code here...
-//		nameLabel.setText("Samuel Katongole");
 //		creationDate.setText(LocalDate.now().toString());
 
 	}
@@ -99,6 +99,7 @@ public class MainFXMLDocumentController implements Initializable {
 			Stage addNoteStage = new Stage();
 			addNoteStage.initModality(Modality.APPLICATION_MODAL);
 			addNoteStage.setTitle("New Note");
+			addNoteStage.getIcons().add(new Image("/images_icons/arola-logo.png"));
 			addNoteStage.setScene(new Scene(root));
 
 			// Show the new stage
@@ -142,6 +143,7 @@ public class MainFXMLDocumentController implements Initializable {
 			Stage addNotebookStage = new Stage();
 			addNotebookStage.initModality(Modality.APPLICATION_MODAL);
 			addNotebookStage.setTitle("New Note Book");
+			addNotebookStage.getIcons().add(new Image("/images_icons/arola-logo.png"));
 			addNotebookStage.setScene(new Scene(root));
 
 			// Show the new stage

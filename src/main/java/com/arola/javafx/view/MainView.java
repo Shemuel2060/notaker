@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;	
 
 public class MainView extends Application {
@@ -20,8 +21,10 @@ public class MainView extends Application {
         MainFXMLDocumentController controller = loader.getController();
 
         // Set up the scene
+        primaryStage.getIcons().add(new Image("/images_icons/arola-logo.png"));
         Scene scene = new Scene(root, 1000, 800);
         primaryStage.setTitle("Arola Notaker");
+        
         primaryStage.setScene(scene);
 
         // Show the stage
