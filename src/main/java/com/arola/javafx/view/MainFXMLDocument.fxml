@@ -22,17 +22,12 @@
 	<!-- Top HBox -->
 	<top>
 		<HBox prefHeight="50" spacing="20">
-			<Label text="Sampling top" textFill="#31ebfc" fx:id="nameLabel" />
-			<Text fx:id="currentNoteUser">
-				<font>
-					<Font size="14.0" />
-				</font>
-			</Text> <!-- dynamic text indicating note user -->
-			<Text fx:id="currentNoteTitle">
-				<font>
-					<Font size="14.0" />
-				</font>
-			</Text> <!-- dynamic text indicating current note -->
+		<!-- Menu icons for saving, opening notes -->
+		
+			<Label text="Current Note User" textFill="#31ebfc" fx:id="nameLabel" />
+			<Label text="Current Notebbok" textFill="#31ebfc" fx:id="currentNotebookName" />
+			<Label text="Current Note Title" textFill="#31ebfc" fx:id="currentNoteTitle" />
+			
 			<!-- ToggleButton for Theme Switching -->
 			<ToggleButton fx:id="themeToggleButton"
 				text="Change Theme" onAction="#toggleTheme">

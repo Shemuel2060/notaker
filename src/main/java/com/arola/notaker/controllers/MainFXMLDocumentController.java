@@ -28,9 +28,6 @@ public class MainFXMLDocumentController implements Initializable {
 	private BorderPane root;
 
 	@FXML
-	private Label nameLabel = new Label(); // name label- left top
-
-	@FXML
 	private Button newNote; // addNote()
 
 	@FXML
@@ -45,6 +42,15 @@ public class MainFXMLDocumentController implements Initializable {
 
 	@FXML
 	private Text creationDate = new Text(); // Creation date in string form.
+
+	@FXML
+	private Label nameLabel;
+	
+	@FXML 
+	private Label currentNoteTitle;
+	
+	@FXML 
+	private Label currentNotebookName;
 
 	public Text getCreationDate() {
 		return creationDate;
