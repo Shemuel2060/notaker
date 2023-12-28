@@ -65,7 +65,13 @@ public class MainFXMLDocumentController implements Initializable {
 		System.out.println("DEBUGGING POINT --> " + "MainFXMLDocumentController initialized!!");
 
 		// initialization code here...
+<<<<<<< HEAD
 //		creationDate.setText(LocalDate.now().toString());
+=======
+//		nameLabel.setText("Samuel Katongole");
+		creationDate.setText(LocalDate.now().toString());
+		creationDate.setStyle("-fx-text-fill:white");
+>>>>>>> passDataBtnControllers
 
 	}
 
@@ -110,11 +116,11 @@ public class MainFXMLDocumentController implements Initializable {
 			// set the note title
 			TextField field = controller.getNoteTitle();
 			String newTitle = field.getText();
-			currentNoteTitle.setText(newTitle);
+			currentNoteTitle.setText(newTitle+" |");
 
 			// set the note owner name
 			String noteOwner = controller.getNoteOwner().getText();
-			nameLabel.setText(noteOwner);
+			nameLabel.setText(noteOwner+" |");
 
 		} catch (Exception e) {
 
@@ -152,8 +158,8 @@ public class MainFXMLDocumentController implements Initializable {
 			// get fields from the AddNoteController
 
 			// set the note title
-			String newTitle =controller.getNotebookTitle().getText();
-			currentNotebookName.setText(newTitle);
+			String newTitle =controller.getNotebookTitle().getText().toUpperCase();
+			currentNotebookName.setText(newTitle+" |");
 
 		} catch (Exception e) {
 
