@@ -71,4 +71,24 @@ public class AddNoteController {
 
 	}
 
+	public TextField getNoteTitle() {
+		return noteTitle;
+	}
+
+	public void setNoteTitle(TextField noteTitle) {
+		this.noteTitle = noteTitle;
+	}
+
+	public TextField getNoteOwner() {
+		return noteOwner;
+	}
+
+	public void setNoteOwner(TextField noteOwner) {
+		this.noteOwner = noteOwner;
+	}
+	
+	
+	
+	
+
 }

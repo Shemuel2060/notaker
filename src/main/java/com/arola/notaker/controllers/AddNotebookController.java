@@ -72,4 +72,22 @@ public class AddNotebookController {
 
 	}
 
+	public TextField getNotebookTitle() {
+		return notebookTitle;
+	}
+
+	public void setNotebookTitle(TextField notebookTitle) {
+		this.notebookTitle = notebookTitle;
+	}
+
+	public TextField getDescription() {
+		return description;
+	}
+
+	public void setDescription(TextField description) {
+		this.description = description;
+	}
+	
+	
+
 }

@@ -36,7 +36,6 @@ public class MainFXMLDocumentController implements Initializable {
 	@FXML
 	private TextField tags;
 
-
 	@FXML
 	private ToggleButton themeToggleButton;
 
@@ -45,11 +44,11 @@ public class MainFXMLDocumentController implements Initializable {
 
 	@FXML
 	private Label nameLabel;
-	
-	@FXML 
+
+	@FXML
 	private Label currentNoteTitle;
-	
-	@FXML 
+
+	@FXML
 	private Label currentNotebookName;
 
 	public Text getCreationDate() {
@@ -65,8 +64,8 @@ public class MainFXMLDocumentController implements Initializable {
 		System.out.println("DEBUGGING POINT --> " + "MainFXMLDocumentController initialized!!");
 
 		// initialization code here...
-		nameLabel.setText("Samuel Katongole");
-		creationDate.setText(LocalDate.now().toString());
+//		nameLabel.setText("Samuel Katongole");
+//		creationDate.setText(LocalDate.now().toString());
 
 	}
 
@@ -94,6 +93,7 @@ public class MainFXMLDocumentController implements Initializable {
 			System.out.println("WORKING: " + fxmlLocation);
 			FXMLLoader loader = new FXMLLoader(fxmlLocation);
 			Parent root = loader.load();
+			AddNoteController controller = loader.getController();
 
 			// Create a new stage
 			Stage addNoteStage = new Stage();
@@ -103,6 +103,18 @@ public class MainFXMLDocumentController implements Initializable {
 
 			// Show the new stage
 			addNoteStage.showAndWait();
+
+			// get fields from the AddNoteController
+
+			// set the note title
+			TextField field = controller.getNoteTitle();
+			String newTitle = field.getText();
+			currentNoteTitle.setText(newTitle);
+
+			// set the note owner name
+			String noteOwner = controller.getNoteOwner().getText();
+			nameLabel.setText(noteOwner);
+
 		} catch (Exception e) {
 
 			System.err.println(e.toString()); // Handle the exception appropriately
@@ -123,6 +135,8 @@ public class MainFXMLDocumentController implements Initializable {
 //			System.out.println("WORKING: "+ fxmlLocation);
 			FXMLLoader loader = new FXMLLoader(fxmlLocation);
 			Parent root = loader.load();
+			
+			AddNotebookController controller = loader.getController();
 
 			// Create a new stage
 			Stage addNotebookStage = new Stage();
@@ -132,6 +146,13 @@ public class MainFXMLDocumentController implements Initializable {
 
 			// Show the new stage
 			addNotebookStage.showAndWait();
+
+			// get fields from the AddNoteController
+
+			// set the note title
+			String newTitle =controller.getNotebookTitle().getText();
+			currentNotebookName.setText(newTitle);
+
 		} catch (Exception e) {
 
 			System.err.println(e.toString());
@@ -142,21 +163,21 @@ public class MainFXMLDocumentController implements Initializable {
 
 	@FXML
 	private void handleaddTags() {
-		
+
 		// detect when enter key is pressed
-		
+
 		// append separator+white space to the entered tag
-		
+
 		// count length of new input and cut off old text+separator+whitespace
-		
+
 		// do that until no imput entered.
-		
-	    tags.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.ENTER) {
-                    String tagText = tags.getText().trim();
-                    tagText = tagText + " | ";
+
+		tags.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				if (event.getCode() == KeyCode.ENTER) {
+					String tagText = tags.getText().trim();
+					tagText = tagText + " | ";
 
 //                    if (!tagText.isEmpty()) {
 //                        // Persist the tagText to the database (replace with your database logic)
@@ -165,11 +186,10 @@ public class MainFXMLDocumentController implements Initializable {
 //                        // Clear the TextField for the next input
 //                        tagInput.clear();
 //                    }
-                }
-            }
-        });
+				}
+			}
+		});
 
-		
 	}
 
 	@FXML

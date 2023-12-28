@@ -24,9 +24,9 @@
 		<HBox prefHeight="50" spacing="20">
 		<!-- Menu icons for saving, opening notes -->
 		
-			<Label text="Current Note User" textFill="#31ebfc" fx:id="nameLabel" />
-			<Label text="Current Notebbok" textFill="#31ebfc" fx:id="currentNotebookName" />
-			<Label text="Current Note Title" textFill="#31ebfc" fx:id="currentNoteTitle" />
+			<Label text="" textFill="#31ebfc" fx:id="nameLabel" />
+			<Label text="" textFill="#31ebfc" fx:id="currentNotebookName" />
+			<Label text="" textFill="#31ebfc" fx:id="currentNoteTitle" />
 			
 			<!-- ToggleButton for Theme Switching -->
 			<ToggleButton fx:id="themeToggleButton"
