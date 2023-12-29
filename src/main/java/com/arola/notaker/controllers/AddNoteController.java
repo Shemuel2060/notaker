@@ -57,20 +57,33 @@ public class AddNoteController {
 			String desc = description.getText();
 
 			// persist note title to DB
-			NotebookDao notebookDAO = new NotebookDao();
-			Notebook created = notebookDAO.createNotebook(notebookName, desc);
-			if (created == null) { // notebook already exists, so add note to it...Later
-				// Create a new alert
-				Alert alert = new Alert(AlertType.INFORMATION);
-
-				// Set the title and content text
-				alert.setTitle("Info");
-				alert.setHeaderText(null); // No header
-				alert.setContentText(notebookName.toUpperCase() + " already exists!");
-
-				// Show the alert
-				alert.showAndWait();
-			}
+			
+			// check if notebook already exists before persisting it and the note
+			
+			// if yes, create note without persisting the notebook again, but
+			// link the two
+			
+			// if not, create note and notebook, linking them together
+			
+			
+			
+			
+			
+//			NotebookDao notebookDAO = new NotebookDao();
+//			Notebook created = notebookDAO.createNotebook(notebookName, desc);
+			
+//			if (created == null) { // notebook already exists, so add note to it...Later
+//				// Create a new alert
+//				Alert alert = new Alert(AlertType.INFORMATION);
+//
+//				// Set the title and content text
+//				alert.setTitle("Info");
+//				alert.setHeaderText(null); // No header
+//				alert.setContentText(notebookName.toUpperCase() + " already exists!");
+//
+//				// Show the alert
+//				alert.showAndWait();
+//			}
 
 		
 			/* =================note logic =================*/
@@ -89,7 +102,8 @@ public class AddNoteController {
 			NotesDao notesDao = new NotesDao();
 			// get note title input
 			String title = noteTitle.getText();
-			notesDao.createNote(title, LocalDate.now(), ownerName);
+			
+			notesDao.createNote(title, date, ownerName, notebookName, desc);
 
 			System.out.println("Note title: " + title);
 

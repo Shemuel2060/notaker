@@ -50,6 +50,12 @@ public class NoteDaoTests {
 		assertEquals(n.getUser().getUserName().length(), userName.length());
 	}
 	
+	@Test
+	public void testCreateNote3() {
+		Note n = noteDao.createNote("note title", LocalDate.now(),
+				"Iona", "My New Notebook2","note-notebook linking2");
+	}
+	
 	@Test // #1
 	public void testPopulateNotes() {
 		NotesDao.populateNotesData();

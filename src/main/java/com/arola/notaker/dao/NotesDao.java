@@ -65,58 +65,6 @@ public class NotesDao implements InoteDao {
 
 	/* ==================== CREATING notes ==================== */
 
-//	@Override
-//	public Note createNote(String title, LocalDate creationDate, User user) {
-//		// Create a new Note instance
-//
-//		Session session = SessionUtil.getSession();
-//		Note note = findNote(session, title);
-//		Note theNote = new Note();
-//		
-//		// get user name...
-//		String userName = user.getUserName();
-//
-//		if (note == null) {
-//			// Set Note properties
-//			note = new Note(); // first instantiate it
-//			note.setTitle(title);
-//			note.setCreationDate(creationDate);
-//			note.setUser(user); // Associate the Note with the provided User
-//
-//			// Save the Note to the database
-//			Transaction transaction = null;
-//			try {
-//				transaction = session.beginTransaction();
-//
-//				// check if user exists
-//				User userInDB = UserDao.findUser(session, userName);
-//				if(userInDB==null) {
-//					session.save(user);
-//					session.save(note);
-//				}else {
-//					session.save(note);
-//					
-//				}
-//				
-//				session.flush();
-//				transaction.commit();
-//			} catch (Exception e) {
-//				if (transaction != null) {
-//					transaction.rollback();
-//				}
-//				e.printStackTrace(); // Handle the exception appropriately in your application
-//			}
-//
-//			theNote = note;
-//		} else {
-//			System.out.println("Note already existing!");
-//			theNote = null; // use Logger class to log some message here...
-//
-//		}
-//		return theNote;
-//
-//	} // END:: createNote(String title, LocalDate creationDate, User user)
-
 	@Override
 	public Note createNote(String title, LocalDate creationDate, String userName) {
 		Session session = SessionUtil.getSession();
@@ -144,6 +92,44 @@ public class NotesDao implements InoteDao {
 		return newNote;
 
 	} // END:: createNote(String title, LocalDate creationDate, String content)
+
+	@Override
+	public Note createNote(String title, LocalDate creationDate, String userName, String notebookName,
+			String notebookDesc) {
+		Session session = SessionUtil.getSession();
+		creationDate = LocalDate.now();
+
+		// Check if the user exists
+		User existingUser = UserDao.findUser(session, userName);
+
+		session.beginTransaction();
+		if (existingUser == null) { // If the user doesn't exist, create a new user
+			existingUser = new User(userName);
+			session.save(existingUser);
+		}
+		
+		// check if the notebook exists
+		NotebookDao notebookDAO = new NotebookDao();
+		Notebook existingNotebook = notebookDAO.findNotebook(notebookName);
+		
+		if(existingNotebook == null) { // notebook does note exist
+			existingNotebook = new Notebook(notebookName, notebookDesc);
+			session.save(existingNotebook);			
+		}
+
+		// Create a new note
+		Note newNote = new Note();
+		newNote.setTitle(title);
+		newNote.setCreationDate(creationDate);
+		newNote.setUser(existingUser);
+		newNote.setNotebook(existingNotebook);
+
+		// Save the note
+		session.save(newNote);
+
+		session.getTransaction().commit();
+		return newNote;
+	}
 
 	@Override
 	public Note getNoteByTitle(String tito) {
