@@ -7,8 +7,8 @@ CREATE DATABASE arola_cornellnotaker;
 USE arola_cornellnotaker; 
 
 -- CRUD OPERATIONS
-SELECT * FROM notes;
 SELECT * FROM users;
+SELECT * FROM notes;
 SELECT * FROM notebooks;
 SELECT * FROM note_tags;
 SELECT * FROM refs;
