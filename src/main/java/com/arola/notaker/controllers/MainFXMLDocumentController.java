@@ -51,6 +51,16 @@ public class MainFXMLDocumentController implements Initializable {
 
 	@FXML
 	private Label currentNotebookName;
+	
+	/* ============= NOT YET ==================== */
+	
+	@FXML
+	private Button openNote;
+	
+	@FXML
+	private TextField searchField;
+	
+	/* ============= END:: NOT YET ==================== */
 
 	public Text getCreationDate() {
 		return creationDate;
@@ -69,8 +79,8 @@ public class MainFXMLDocumentController implements Initializable {
 //		creationDate.setText(LocalDate.now().toString());
 
 //		nameLabel.setText("Samuel Katongole");
-		creationDate.setText(LocalDate.now().toString());
-		creationDate.setStyle("-fx-text-fill:white");
+//		creationDate.setText(LocalDate.now().toString());
+//		creationDate.setStyle("-fx-text-fill:white");
 
 
 	}
@@ -112,7 +122,7 @@ public class MainFXMLDocumentController implements Initializable {
 			addNoteStage.showAndWait();
 
 			// get fields from the AddNoteController
-
+			creationDate.setText(LocalDate.now().toString());
 			// set the note title
 			TextField field = controller.getNoteTitle();
 			String newTitle = field.getText();
@@ -121,6 +131,10 @@ public class MainFXMLDocumentController implements Initializable {
 			// set the note owner name
 			String noteOwner = controller.getNoteOwner().getText();
 			nameLabel.setText(noteOwner);
+			
+			// set the notebook name
+			String notebookName = controller.getNotebookTitle().getText().toUpperCase();
+			currentNotebookName.setText(notebookName);
 
 		} catch (Exception e) {
 
@@ -130,45 +144,10 @@ public class MainFXMLDocumentController implements Initializable {
 	}
 
 	@FXML
-	/**
-	 * brings up a new window to add details about the new notebook to add or start
-	 * writing.
-	 */
-	private void addNotebook() {
-
-		try {
-			// Load the FXML for the new window
-			URL fxmlLocation = getClass().getResource("/com/arola/javafx/view/addNotebookWindow.fxml");
-//			System.out.println("WORKING: "+ fxmlLocation);
-			FXMLLoader loader = new FXMLLoader(fxmlLocation);
-			Parent root = loader.load();
-			
-			AddNotebookController controller = loader.getController();
-
-			// Create a new stage
-			Stage addNotebookStage = new Stage();
-			addNotebookStage.initModality(Modality.APPLICATION_MODAL);
-			addNotebookStage.setTitle("New Note Book");
-			addNotebookStage.getIcons().add(new Image("/images_icons/arola-logo.png"));
-			addNotebookStage.setScene(new Scene(root));
-
-			// Show the new stage
-			addNotebookStage.showAndWait();
-
-			// get fields from the AddNoteController
-
-			// set the note title
-			String newTitle =controller.getNotebookTitle().getText().toUpperCase();
-			currentNotebookName.setText(newTitle);
-
-		} catch (Exception e) {
-
-			System.err.println(e.toString());
-			; // Handle the exception appropriately
-		}
-
+	private void openNote() {
+		
 	}
-
+	
 	@FXML
 	private void handleaddTags() {
 

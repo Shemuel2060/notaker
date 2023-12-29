@@ -45,8 +45,8 @@
 					<Font size="14.0" />
 				</font>
 			</TextField>
-			<Button fx:id="newNotebook" text="New Notebook"
-				onAction="#addNotebook">
+			<Button fx:id="openNote" text="Open Note"
+				onAction="#openNote">
 				<font>
 					<Font size="14.0" />
 				</font>
@@ -54,7 +54,7 @@
 					<ImageView fitHeight="15.0" fitWidth="15.0"
 						pickOnBounds="true" preserveRatio="true">
 						<image>
-							<Image url="@/images_icons/plus-icon.png" />
+							<Image url="@/images_icons/note-icon.png" />
 						</image>
 					</ImageView>
 				</graphic>
@@ -73,7 +73,7 @@
 				</graphic>
 			</Button>
 			<!-- print button -->
-			<Button fx:id="newNote" text="Print">
+			<Button fx:id="newNote" text="Print Note">
 				<font>
 					<Font size="14.0" />
 				</font>
@@ -124,7 +124,7 @@
 				styleClass="aligned">
 				<ImageView fitWidth="20" fitHeight="20"
 					GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="hovered">
-					<Image url="@/images_icons/menu-icon.png" />
+					<Image url="@/images_icons/tags-icon.png" />
 				</ImageView>
 				<Label text="Tags: " GridPane.rowIndex="1"
 					GridPane.columnIndex="1">
@@ -149,7 +149,7 @@
 
 				<ImageView fitWidth="20" fitHeight="20"
 					GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="hovered">
-					<Image url="@/images_icons/menu-icon.png" />
+					<Image url="@/images_icons/references-icon.png" />
 				</ImageView>
 				<Label text="References: " GridPane.rowIndex="2"
 					GridPane.columnIndex="1">

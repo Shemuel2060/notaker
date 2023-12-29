@@ -3,38 +3,69 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
 
 
 <?xml-model href=""?>
-<VBox xmlns:fx="http://javafx.com/fxml/1"
+<GridPane xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="com.arola.notaker.controllers.AddNoteController"
-	spacing="20" prefWidth="300" prefHeight="200" alignment="CENTER"
-	stylesheets="/styles/mainView.css" styleClass="note-view">
+	prefWidth="350" prefHeight="300" stylesheets="/styles/mainView.css"
+	styleClass="note-view" hgap="10" vgap="10">
+	<padding>
+		<Insets top="25" right="25" bottom="10" left="25" />
+	</padding>
 
-	<HBox spacing="20">
-		<Label text="Title: " />
-		<TextField fx:id="noteTitle" promptText="Note title"
-			maxWidth="200" styleClass="type-area">
-			<font>
-				<Font size="14.0" />
-			</font>
-		</TextField>
-	</HBox>
+	<Label text="Add New Note" GridPane.rowIndex="0"
+		GridPane.columnIndex="0" GridPane.columnSpan="2" 
+		styleClass="add-new-note"/>
+	<Label text="Notebook: " GridPane.rowIndex="1"
+		GridPane.columnIndex="0" />
+	<TextField fx:id="notebookTitle" promptText="Note book name"
+		maxWidth="200" styleClass="type-area" GridPane.rowIndex="1"
+		GridPane.columnIndex="1">
+		<font>
+			<Font size="14.0" />
+		</font>
+	</TextField>
 
-	<HBox>
-		<Label text="Owner:  " />
-		<TextField fx:id="noteOwner" promptText="Your name..."
-			maxWidth="200" styleClass="type-area">
-			<font>
-				<Font size="14.0" />
-			</font>
-		</TextField>
-	</HBox>
+	<Label text="Description:  " GridPane.rowIndex="2"
+		GridPane.columnIndex="0" />
+	<TextField fx:id="description"
+		promptText="Short description..." maxWidth="200"
+		styleClass="type-area" GridPane.rowIndex="2" GridPane.columnIndex="1">
+		<font>
+			<Font size="14.0" />
+		</font>
+	</TextField>
 
 
-	<Button text="Add Note" onAction="#addNote" fx:id="button">
+	<Label text="Note Title: " GridPane.rowIndex="3"
+		GridPane.columnIndex="0" />
+	<TextField fx:id="noteTitle" promptText="Note title"
+		maxWidth="200" styleClass="type-area" GridPane.rowIndex="3"
+		GridPane.columnIndex="1">
+		<font>
+			<Font size="14.0" />
+		</font>
+	</TextField>
+
+	<Label text="Note Owner:  " GridPane.rowIndex="4"
+		GridPane.columnIndex="0" />
+	<TextField fx:id="noteOwner" promptText="Your name..."
+		maxWidth="200" styleClass="type-area" GridPane.rowIndex="4"
+		GridPane.columnIndex="1">
+		<font>
+			<Font size="14.0" />
+		</font>
+	</TextField>
+
+	<Button text="Add Note" onAction="#addNote" fx:id="button"
+		GridPane.rowIndex="5" GridPane.columnIndex="1"
+		styleClass="addNote-btn">
 		<font>
 			<Font size="18.0" />
 		</font>
 	</Button>
-</VBox>
+
+</GridPane>
