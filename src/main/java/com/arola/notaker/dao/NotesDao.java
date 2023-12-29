@@ -114,6 +114,7 @@ public class NotesDao implements InoteDao {
 		
 		if(existingNotebook == null) { // notebook does note exist
 			existingNotebook = new Notebook(notebookName, notebookDesc);
+			existingNotebook.setUser(existingUser); // link user to notebook
 			session.save(existingNotebook);			
 		}
 
@@ -121,8 +122,8 @@ public class NotesDao implements InoteDao {
 		Note newNote = new Note();
 		newNote.setTitle(title);
 		newNote.setCreationDate(creationDate);
-		newNote.setUser(existingUser);
-		newNote.setNotebook(existingNotebook);
+		newNote.setUser(existingUser); // link user to note
+		newNote.setNotebook(existingNotebook); // link note to notebook
 
 		// Save the note
 		session.save(newNote);
