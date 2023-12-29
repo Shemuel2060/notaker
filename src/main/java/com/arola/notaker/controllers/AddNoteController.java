@@ -45,69 +45,27 @@ public class AddNoteController {
 	private void addNote() {
 
 		try {
-			
+
 			// Get the stage
 			Stage stage = (Stage) button.getScene().getWindow();
-			
-			/* =================notebook logic =================*/
 
+			/* =================note logic ================= */
 
 			// get inputs
 			String notebookName = notebookTitle.getText();
 			String desc = description.getText();
-
-			// persist note title to DB
-			
-			// check if notebook already exists before persisting it and the note
-			
-			// if yes, create note without persisting the notebook again, but
-			// link the two
-			
-			// if not, create note and notebook, linking them together
-			
-			
-			
-			
-			
-//			NotebookDao notebookDAO = new NotebookDao();
-//			Notebook created = notebookDAO.createNotebook(notebookName, desc);
-			
-//			if (created == null) { // notebook already exists, so add note to it...Later
-//				// Create a new alert
-//				Alert alert = new Alert(AlertType.INFORMATION);
-//
-//				// Set the title and content text
-//				alert.setTitle("Info");
-//				alert.setHeaderText(null); // No header
-//				alert.setContentText(notebookName.toUpperCase() + " already exists!");
-//
-//				// Show the alert
-//				alert.showAndWait();
-//			}
-
-		
-			/* =================note logic =================*/
-			
-			// LATER...
-			LocalDate date = LocalDate.now();
-			String dated = date.toString();
-
 			// get input for note owner name
 			String ownerName = noteOwner.getText();
 
-			System.out.println("DEBUGGING POINT--> NAME: " + ownerName);
-
+			LocalDate date = LocalDate.now();
+			String dated = date.toString();
 
 			// persist note title to DB
 			NotesDao notesDao = new NotesDao();
 			// get note title input
 			String title = noteTitle.getText();
-			
+
 			notesDao.createNote(title, date, ownerName, notebookName, desc);
-
-			System.out.println("Note title: " + title);
-
-			System.out.println("Note Title saved in DB");
 
 			// close stage after persisting note to DB
 			stage.close();
