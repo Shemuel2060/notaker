@@ -124,6 +124,9 @@ public class NotesDao implements InoteDao {
 		newNote.setCreationDate(creationDate);
 		newNote.setUser(existingUser); // link user to note
 		newNote.setNotebook(existingNotebook); // link note to notebook
+		
+		// set empty contents
+		newNote.setContents("");
 
 		// Save the note
 		session.save(newNote);
@@ -134,19 +137,21 @@ public class NotesDao implements InoteDao {
 
 	@Override
 	public Note getNoteByTitle(String tito) {
+		
 		Note n = null;
-		Session session = SessionUtil.getSession();
 		Transaction tr = null; // in-activate any active transactions
-		try {
+		try(Session session = SessionUtil.getSession()) {
+			
 			tr = session.beginTransaction();
 			n = findNote(session, tito);
 			tr.commit();
+			
 
 		} catch (Exception e) {
 			System.err.println(e.toString());
 		}
-//		System.out.println("Note got by title: \n"+n.toString()); -- Not working, why??
 		return n;
+		
 	} // END:: getNoteByTitle(String tito)
 
 	@Override

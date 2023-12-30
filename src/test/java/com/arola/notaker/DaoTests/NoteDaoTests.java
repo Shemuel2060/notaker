@@ -63,9 +63,10 @@ public class NoteDaoTests {
 	
 	@Test // #2
 	public void testGetNoteByTitle() {
-		Note n = noteDao.getNoteByTitle("Chemical Kinetics");
+		Note n = noteDao.getNoteByTitle("Key Events");
 		int noteId = n.getNoteId();
-		assertEquals(noteId,2);
+		assertEquals(noteId,6);
+		System.out.println(n.getCreationDate().toString());
 	} // END:: testGetNoteByTitle() 
 	
 	@Test // #3
@@ -93,8 +94,8 @@ public class NoteDaoTests {
 				+ "mappings between them. Skills such are normalization, "
 				+ "and others are curcial in ensuring that this happens.";
 		
-		noteDao.editNoteContent("Database Design", newContents);
-		Note n = noteDao.getNoteByTitle("Database Design");
+		noteDao.editNoteContent("Seven Churches", newContents);
+		Note n = noteDao.getNoteByTitle("Seven Churches");
 		assertEquals(n.getContents().length(), newContents.length());
 	}
 	

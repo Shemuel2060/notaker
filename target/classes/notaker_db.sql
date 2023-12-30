@@ -10,12 +10,13 @@ USE arola_cornellnotaker;
 SELECT * FROM users;
 SELECT * FROM notes;
 SELECT * FROM notebooks;
+SELECT * FROM summary;
 SELECT * FROM note_tags;
 SELECT * FROM refs;
 SELECT * FROM refs_notes;
 SELECT * FROM reminders;
 SELECT * FROM tags;
-SELECT * FROM summary;
+
 
 
 -- disable safe update model

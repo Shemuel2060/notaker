@@ -2,20 +2,20 @@
 <testng-results ignored="9" total="10" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-12-29T13:04:02 EAT" name="Default suite" finished-at="2023-12-29T13:04:10 EAT" duration-ms="7191">
+  <suite started-at="2023-12-30T23:20:37 EAT" name="Default suite" finished-at="2023-12-30T23:20:41 EAT" duration-ms="3914">
     <groups>
     </groups>
-    <test started-at="2023-12-29T13:04:02 EAT" name="Default test" finished-at="2023-12-29T13:04:10 EAT" duration-ms="7191">
+    <test started-at="2023-12-30T23:20:37 EAT" name="Default test" finished-at="2023-12-30T23:20:41 EAT" duration-ms="3914">
       <class name="com.arola.notaker.DaoTests.NoteDaoTests">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.arola.notaker.DaoTests.NoteDaoTests@4d0f2471]" started-at="2023-12-29T13:04:03 EAT" name="setUp" finished-at="2023-12-29T13:04:09 EAT" duration-ms="6873" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.arola.notaker.DaoTests.NoteDaoTests@4d0f2471]" started-at="2023-12-30T23:20:37 EAT" name="setUp" finished-at="2023-12-30T23:20:41 EAT" duration-ms="3746" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testCreateNote3()[pri:0, instance:com.arola.notaker.DaoTests.NoteDaoTests@4d0f2471]" started-at="2023-12-29T13:04:09 EAT" name="testCreateNote3" finished-at="2023-12-29T13:04:10 EAT" duration-ms="242" status="PASS">
+        <test-method signature="testeditNoteContent()[pri:0, instance:com.arola.notaker.DaoTests.NoteDaoTests@4d0f2471]" started-at="2023-12-30T23:20:41 EAT" name="testeditNoteContent" finished-at="2023-12-30T23:20:41 EAT" duration-ms="124" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testCreateNote3 -->
-        <test-method is-config="true" signature="shutDown()[pri:0, instance:com.arola.notaker.DaoTests.NoteDaoTests@4d0f2471]" started-at="2023-12-29T13:04:10 EAT" name="shutDown" finished-at="2023-12-29T13:04:10 EAT" duration-ms="2" status="PASS">
+        </test-method> <!-- testeditNoteContent -->
+        <test-method is-config="true" signature="shutDown()[pri:0, instance:com.arola.notaker.DaoTests.NoteDaoTests@4d0f2471]" started-at="2023-12-30T23:20:41 EAT" name="shutDown" finished-at="2023-12-30T23:20:41 EAT" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shutDown -->

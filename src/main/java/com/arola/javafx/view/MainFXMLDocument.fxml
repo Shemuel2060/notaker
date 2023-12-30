@@ -198,7 +198,8 @@
 
 				<content>
 					<TextArea prefWidth="1000" prefHeight="470"
-						wrapText="true" promptText="Type notes here..." />
+						wrapText="true" promptText="Type notes here..." 
+						fx:id="notesArea" onKeyTyped="#saveNotesContent"/>
 				</content>
 			</ScrollPane>
 		</VBox>
