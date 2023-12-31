@@ -189,9 +189,10 @@
 				styleClass="aligned">
 				<TextField fx:id="comment" GridPane.rowIndex="4"
 					promptText="Add a comment" GridPane.columnIndex="0"
-					GridPane.columnSpan="3" styleClass="empty-textField,textfields">
+					GridPane.columnSpan="3" styleClass="empty-textField,textfields"
+					prefWidth="800" onKeyTyped="#addComment">
 					<font>
-						<Font size="14.0" />
+						<Font size="10.0" />
 					</font>
 				</TextField> <!-- dynamic creation date -->
 			</GridPane>

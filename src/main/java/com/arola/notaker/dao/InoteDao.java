@@ -94,6 +94,8 @@ public interface InoteDao {
 	
 	public void editNoteCues(String title, String newCues);
 	
+	public void editNoteComment(String title, String newComment);
+	
 	/**
 	 * Deletes a note by its title.
 	 * @param title

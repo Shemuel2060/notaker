@@ -107,15 +107,15 @@ public class NotesDao implements InoteDao {
 			existingUser = new User(userName);
 			session.save(existingUser);
 		}
-		
+
 		// check if the notebook exists
 		NotebookDao notebookDAO = new NotebookDao();
 		Notebook existingNotebook = notebookDAO.findNotebook(notebookName);
-		
-		if(existingNotebook == null) { // notebook does note exist
+
+		if (existingNotebook == null) { // notebook does note exist
 			existingNotebook = new Notebook(notebookName, notebookDesc);
 			existingNotebook.setUser(existingUser); // link user to notebook
-			session.save(existingNotebook);			
+			session.save(existingNotebook);
 		}
 
 		// Create a new note
@@ -124,11 +124,12 @@ public class NotesDao implements InoteDao {
 		newNote.setCreationDate(creationDate);
 		newNote.setUser(existingUser); // link user to note
 		newNote.setNotebook(existingNotebook); // link note to notebook
-		
+
 		// set empty contents
 		newNote.setContents("");
 		newNote.setSummary("");
 		newNote.setCues("");
+		newNote.setComment("");
 
 		// Save the note
 		session.save(newNote);
@@ -139,21 +140,20 @@ public class NotesDao implements InoteDao {
 
 	@Override
 	public Note getNoteByTitle(String tito) {
-		
+
 		Note n = null;
 		Transaction tr = null; // in-activate any active transactions
-		try(Session session = SessionUtil.getSession()) {
-			
+		try (Session session = SessionUtil.getSession()) {
+
 			tr = session.beginTransaction();
 			n = findNote(session, tito);
 			tr.commit();
-			
 
 		} catch (Exception e) {
 			System.err.println(e.toString());
 		}
 		return n;
-		
+
 	} // END:: getNoteByTitle(String tito)
 
 	@Override
@@ -216,7 +216,7 @@ public class NotesDao implements InoteDao {
 		}
 
 	}
-	
+
 	@Override
 	public void editNoteSummary(String title, String newSummary) {
 		try (Session session = SessionUtil.getSession()) {
@@ -224,10 +224,9 @@ public class NotesDao implements InoteDao {
 			// find note if its title exists
 			Note note = findNote(session, title);
 			// check if note exists
-			if (note != null) { 
+			if (note != null) {
 				Query<?> query = session
-						.createQuery("update Note set summary=:noteSummary where " 
-				+ "title=:noteTitle");
+						.createQuery("update Note set summary=:noteSummary where " + "title=:noteTitle");
 				query.setParameter("noteTitle", title);
 				query.setParameter("noteSummary", newSummary);
 				query.executeUpdate();
@@ -235,7 +234,7 @@ public class NotesDao implements InoteDao {
 
 			tr.commit();
 		}
-		
+
 	}
 
 	@Override
@@ -245,10 +244,8 @@ public class NotesDao implements InoteDao {
 			// find note if its title exists
 			Note note = findNote(session, title);
 			// check if note exists
-			if (note != null) { 
-				Query<?> query = session
-						.createQuery("update Note set cues=:noteCues where " 
-				+ "title=:noteTitle");
+			if (note != null) {
+				Query<?> query = session.createQuery("update Note set cues=:noteCues where " + "title=:noteTitle");
 				query.setParameter("noteTitle", title);
 				query.setParameter("noteCues", newCues);
 				query.executeUpdate();
@@ -256,9 +253,28 @@ public class NotesDao implements InoteDao {
 
 			tr.commit();
 		}
-		
+
 	}
-	
+
+	@Override
+	public void editNoteComment(String title, String newComment) {
+		try (Session session = SessionUtil.getSession()) {
+			Transaction tr = session.beginTransaction();
+			// find note if its title exists
+			Note note = findNote(session, title);
+			// check if note exists
+			if (note != null) {
+				Query<?> query = session.createQuery("update Note set comment=:noteComment where " 
+						+ "title=:noteTitle");
+				query.setParameter("noteTitle", title);
+				query.setParameter("noteComment", newComment);
+				query.executeUpdate();
+			}
+
+			tr.commit();
+		}
+	}
+
 	/* ==================== DELETING notes ==================== */
 
 	@Override
@@ -301,7 +317,5 @@ public class NotesDao implements InoteDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 
 }

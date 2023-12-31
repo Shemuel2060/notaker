@@ -48,6 +48,9 @@ public class Note {
 	@Column(name="CUES",  columnDefinition = "LONGTEXT")
 	private String cues;
 	
+	@Column(name="COMMENT",  columnDefinition = "LONGTEXT")
+	private String comment;
+	
 	@Column(name="CREATIONDATE")
 	private LocalDate creationDate;
 	
@@ -68,10 +71,6 @@ public class Note {
 	@JoinColumn(name="USERS_ID")
 	private User user; // user who owns the 
 
-	
-//	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-//	@JoinColumn(name="REMINDER_ID")
-//	private Reminder reminder;
 	
 	@ManyToMany(fetch=FetchType.LAZY, cascade= {
 			CascadeType.PERSIST, CascadeType.MERGE,

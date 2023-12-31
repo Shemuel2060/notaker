@@ -72,6 +72,9 @@ public class MainFXMLDocumentController implements Initializable {
 	@FXML
 	private TextArea cueArea;
 
+	@FXML
+	private TextField comment;
+
 	public Text getCreationDate() {
 		return creationDate;
 	}
@@ -227,6 +230,31 @@ public class MainFXMLDocumentController implements Initializable {
 			// update existing note content
 			String newCues = cueArea.getText();
 			notesDAO.editNoteCues(currentNoteByTitle, newCues);
+
+		}
+
+	}
+
+	@FXML
+	private void addComment(KeyEvent ke) {
+		// get current note
+
+		String currentNoteByTitle = currentNoteTitle.getText();
+
+		// get Note object by its title
+		NotesDao notesDAO = new NotesDao();
+		Note note = notesDAO.getNoteByTitle(currentNoteByTitle);
+
+		// check if note's content is empty, if yes, add notes being types
+		if (note.getComment() == "") { // note content is empty
+			// add typed summary to the note
+
+			note.setComment(comment.getText());
+
+		} else { // note content is not empty,
+			// update existing note content
+			String newComment = comment.getText();
+			notesDAO.editNoteComment(currentNoteByTitle, newComment);
 
 		}
 
