@@ -88,6 +88,12 @@ public interface InoteDao {
 	 */
 	public void editNoteContent(String title, String newContent);
 	
+	
+	public void editNoteSummary(String title, String newSummary);
+	
+	
+	public void editNoteCues(String title, String newCues);
+	
 	/**
 	 * Deletes a note by its title.
 	 * @param title

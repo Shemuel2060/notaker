@@ -54,19 +54,23 @@ public class MainFXMLDocumentController implements Initializable {
 
 	@FXML
 	private Label currentNotebookName;
-	
+
 	/* ============= NOT YET ==================== */
-	
+
 	@FXML
 	private Button openNote;
-	
+
 	@FXML
 	private TextField searchField;
-	
+	/* ============= END:: NOT YET ==================== */
 	@FXML
 	private TextArea notesArea;
-	
-	/* ============= END:: NOT YET ==================== */
+
+	@FXML
+	private TextArea summaryArea;
+
+	@FXML
+	private TextArea cueArea;
 
 	public Text getCreationDate() {
 		return creationDate;
@@ -87,7 +91,6 @@ public class MainFXMLDocumentController implements Initializable {
 //		nameLabel.setText("Samuel Katongole");
 //		creationDate.setText(LocalDate.now().toString());
 //		creationDate.setStyle("-fx-text-fill:white");
-
 
 	}
 
@@ -137,7 +140,7 @@ public class MainFXMLDocumentController implements Initializable {
 			// set the note owner name
 			String noteOwner = controller.getNoteOwner().getText();
 			nameLabel.setText(noteOwner);
-			
+
 			// set the notebook name
 			String notebookName = controller.getNotebookTitle().getText().toUpperCase();
 			currentNotebookName.setText(notebookName);
@@ -151,36 +154,84 @@ public class MainFXMLDocumentController implements Initializable {
 
 	@FXML
 	private void openNote() {
-		
+
 	}
-	
+
 	@FXML
 	private void saveNotesContent(KeyEvent ke) {
 		// get current note
-		
+
 		String currentNoteByTitle = currentNoteTitle.getText();
-		
+
 		// get Note object by its title
 		NotesDao notesDAO = new NotesDao();
 		Note note = notesDAO.getNoteByTitle(currentNoteByTitle);
-		
+
 		// check if note's content is empty, if yes, add notes being types
-		if(note.getContents()=="") { // note content is empty
+		if (note.getContents() == "") { // note content is empty
 			// add typed content to the note
-			note.setContents(notesArea.getText());	
-			
-		}else { // note content is not empty, 
+			note.setContents(notesArea.getText());
+
+		} else { // note content is not empty,
 			// update existing note content
-			String newContent=notesArea.getText();
+			String newContent = notesArea.getText();
 			notesDAO.editNoteContent(currentNoteByTitle, newContent);
-			
+
 		}
-		
-		// if not, update existing notes with the new notes
-		
-		
+
 	}
-	
+
+	@FXML
+	private void saveNotesSummary(KeyEvent ke) {
+		// get current note
+
+		String currentNoteByTitle = currentNoteTitle.getText();
+
+		// get Note object by its title
+		NotesDao notesDAO = new NotesDao();
+		Note note = notesDAO.getNoteByTitle(currentNoteByTitle);
+
+		// check if note's content is empty, if yes, add notes being types
+		if (note.getSummary() == "") { // note content is empty
+			// add typed summary to the note
+
+			note.setSummary(summaryArea.getText());
+
+		} else { // note content is not empty,
+			// update existing note content
+			String newSummary = summaryArea.getText();
+			notesDAO.editNoteSummary(currentNoteByTitle, newSummary);
+
+		}
+
+	}
+
+	@FXML
+	private void saveNotesCues(KeyEvent ke) {
+
+		// get current note
+
+		String currentNoteByTitle = currentNoteTitle.getText();
+
+		// get Note object by its title
+		NotesDao notesDAO = new NotesDao();
+		Note note = notesDAO.getNoteByTitle(currentNoteByTitle);
+
+		// check if note's content is empty, if yes, add notes being types
+		if (note.getCues() == "") { // note content is empty
+			// add typed summary to the note
+
+			note.setCues(cueArea.getText());
+
+		} else { // note content is not empty,
+			// update existing note content
+			String newCues = cueArea.getText();
+			notesDAO.editNoteCues(currentNoteByTitle, newCues);
+
+		}
+
+	}
+
 	@FXML
 	private void handleaddTags() {
 

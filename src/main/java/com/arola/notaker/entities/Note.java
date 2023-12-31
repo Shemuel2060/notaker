@@ -36,16 +36,22 @@ public class Note {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private int noteId;
 	
-	@Column(name="NOTE_TITLE")
+	@Column(name="TITLE")
 	private String title;
 	
-	@Column(name="NOTE_CONTENTS",  columnDefinition = "LONGTEXT")
+	@Column(name="CONTENTS",  columnDefinition = "LONGTEXT")
 	private String contents;
 	
-	@Column(name="NOTE_CREATIONDATE")
+	@Column(name="SUMMARY",  columnDefinition = "LONGTEXT")
+	private String summary;
+	
+	@Column(name="CUES",  columnDefinition = "LONGTEXT")
+	private String cues;
+	
+	@Column(name="CREATIONDATE")
 	private LocalDate creationDate;
 	
-	@Column(name="NOTE_LASTMODIFICATIONDATE")
+	@Column(name="LASTMODIFICATIONDATE")
 	private LocalDate lastModifiedDate;
 	
 	
@@ -63,9 +69,9 @@ public class Note {
 	private User user; // user who owns the 
 
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="REMINDER_ID")
-	private Reminder reminder;
+//	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+//	@JoinColumn(name="REMINDER_ID")
+//	private Reminder reminder;
 	
 	@ManyToMany(fetch=FetchType.LAZY, cascade= {
 			CascadeType.PERSIST, CascadeType.MERGE,

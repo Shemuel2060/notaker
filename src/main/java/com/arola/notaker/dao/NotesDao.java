@@ -127,6 +127,8 @@ public class NotesDao implements InoteDao {
 		
 		// set empty contents
 		newNote.setContents("");
+		newNote.setSummary("");
+		newNote.setCues("");
 
 		// Save the note
 		session.save(newNote);
@@ -214,6 +216,50 @@ public class NotesDao implements InoteDao {
 		}
 
 	}
+	
+	@Override
+	public void editNoteSummary(String title, String newSummary) {
+		try (Session session = SessionUtil.getSession()) {
+			Transaction tr = session.beginTransaction();
+			// find note if its title exists
+			Note note = findNote(session, title);
+			// check if note exists
+			if (note != null) { 
+				Query<?> query = session
+						.createQuery("update Note set summary=:noteSummary where " 
+				+ "title=:noteTitle");
+				query.setParameter("noteTitle", title);
+				query.setParameter("noteSummary", newSummary);
+				query.executeUpdate();
+			}
+
+			tr.commit();
+		}
+		
+	}
+
+	@Override
+	public void editNoteCues(String title, String newCues) {
+		try (Session session = SessionUtil.getSession()) {
+			Transaction tr = session.beginTransaction();
+			// find note if its title exists
+			Note note = findNote(session, title);
+			// check if note exists
+			if (note != null) { 
+				Query<?> query = session
+						.createQuery("update Note set cues=:noteCues where " 
+				+ "title=:noteTitle");
+				query.setParameter("noteTitle", title);
+				query.setParameter("noteCues", newCues);
+				query.executeUpdate();
+			}
+
+			tr.commit();
+		}
+		
+	}
+	
+	/* ==================== DELETING notes ==================== */
 
 	@Override
 	public void deleteNoteByTitle(String noteTitle) {
@@ -255,5 +301,7 @@ public class NotesDao implements InoteDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }

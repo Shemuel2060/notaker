@@ -22,12 +22,15 @@
 	<!-- Top HBox -->
 	<top>
 		<HBox prefHeight="50" spacing="20">
-		<!-- Menu icons for saving, opening notes -->
-		
-			<Label text="" textFill="#31ebfc" fx:id="nameLabel" styleClass="top-labels"/>
-			<Label text="" textFill="#31ebfc" fx:id="currentNotebookName" styleClass="top-labels" />
-			<Label text="" textFill="#31ebfc" fx:id="currentNoteTitle" styleClass="top-labels"/>
-			
+			<!-- Menu icons for saving, opening notes -->
+
+			<Label text="" textFill="#31ebfc" fx:id="nameLabel"
+				styleClass="top-labels" />
+			<Label text="" textFill="#31ebfc" fx:id="currentNotebookName"
+				styleClass="top-labels" />
+			<Label text="" textFill="#31ebfc" fx:id="currentNoteTitle"
+				styleClass="top-labels" />
+
 			<!-- ToggleButton for Theme Switching -->
 			<ToggleButton fx:id="themeToggleButton"
 				text="Change Theme" onAction="#toggleTheme">
@@ -45,8 +48,7 @@
 					<Font size="14.0" />
 				</font>
 			</TextField>
-			<Button fx:id="openNote" text="Open Note"
-				onAction="#openNote">
+			<Button fx:id="openNote" text="Open Note" onAction="#openNote">
 				<font>
 					<Font size="14.0" />
 				</font>
@@ -91,11 +93,13 @@
 
 			<!-- cue section -->
 			<ScrollPane>
-				<TextArea wrapText="true" fx:id="cueContents"
-					promptText="have your queries, thoughts and ideas here..."
-					prefWidth="300" prefHeight="350">
+				<content>
+					<TextArea wrapText="true"
+						promptText="have your queries, thoughts and ideas here..."
+						prefWidth="300" prefHeight="350" fx:id="cueArea"
+						onKeyTyped="#saveNotesCues" />
+				</content>
 
-				</TextArea>
 			</ScrollPane>
 
 		</VBox>
@@ -117,7 +121,7 @@
 					</font>
 				</Label>
 				<Text fx:id="creationDate" GridPane.rowIndex="0"
-					GridPane.columnIndex="2" styleClass="dates"/> <!-- dynamic creation date -->
+					GridPane.columnIndex="2" styleClass="dates" /> <!-- dynamic creation date -->
 			</GridPane>
 			<!-- the tags -->
 			<GridPane xmlns="http://javafx.com/javafx/1" hgap="20"
@@ -133,9 +137,8 @@
 					</font>
 				</Label>
 				<TextField fx:id="tags" onAction="#handleaddTags"
-					GridPane.rowIndex="1" GridPane.columnIndex="2" 
-					styleClass="empty-textField,textfields"
-					promptText="Add tags" >
+					GridPane.rowIndex="1" GridPane.columnIndex="2"
+					styleClass="empty-textField,textfields" promptText="Add tags">
 					<font>
 						<Font size="14.0" />
 					</font>
@@ -158,9 +161,8 @@
 					</font>
 				</Label>
 				<TextField fx:id="refs" onAction="#addRefs"
-					GridPane.rowIndex="2" GridPane.columnIndex="2" 
-					styleClass="empty-textField,textfields"
-					promptText="Add references">
+					GridPane.rowIndex="2" GridPane.columnIndex="2"
+					styleClass="empty-textField,textfields" promptText="Add references">
 					<font>
 						<Font size="14.0" />
 					</font>
@@ -180,7 +182,7 @@
 					</font>
 				</Label>
 				<Text fx:id="dynamicText" GridPane.rowIndex="3"
-					GridPane.columnIndex="2" styleClass="dates"/> <!-- dynamic creation date -->
+					GridPane.columnIndex="2" styleClass="dates" /> <!-- dynamic creation date -->
 			</GridPane>
 			<Separator />
 			<GridPane xmlns="http://javafx.com/javafx/1"
@@ -198,8 +200,8 @@
 
 				<content>
 					<TextArea prefWidth="1000" prefHeight="470"
-						wrapText="true" promptText="Type notes here..." 
-						fx:id="notesArea" onKeyTyped="#saveNotesContent"/>
+						wrapText="true" promptText="Type notes here..." fx:id="notesArea"
+						onKeyTyped="#saveNotesContent" />
 				</content>
 			</ScrollPane>
 		</VBox>
@@ -210,15 +212,11 @@
 
 	<!-- Bottom ScrollPane with TextArea -->
 	<bottom>
-		<Label text="SUMMARY">
-			<font>
-				<Font size="14.0" />
-			</font>
-		</Label>
 		<ScrollPane>
 			<content>
 				<TextArea prefWidth="1300" prefHeight="200" wrapText="true"
-					promptText="Type summary here..." />
+					promptText="Type summary here..." fx:id="summaryArea"
+					onKeyTyped="#saveNotesSummary" />
 			</content>
 		</ScrollPane>
 	</bottom>
