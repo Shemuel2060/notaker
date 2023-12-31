@@ -42,8 +42,9 @@
 	<!-- Left VBox -->
 	<left>
 		<VBox prefWidth="300" prefHeight="400" spacing="20">
-			<TextField fx:id="searchField" promptText="Search..."
-				maxWidth="200" styleClass="empty-textField, textfields">
+			<TextField fx:id="searchField"
+				promptText="Search by title or author" maxWidth="200"
+				styleClass="empty-textField, textfields">
 				<font>
 					<Font size="14.0" />
 				</font>
@@ -75,7 +76,7 @@
 				</graphic>
 			</Button>
 			<!-- print button -->
-			<Button fx:id="newNote" text="Print Note">
+			<Button fx:id="printNote" text="Print Note">
 				<font>
 					<Font size="14.0" />
 				</font>
@@ -138,7 +139,8 @@
 				</Label>
 				<TextField fx:id="tags" onAction="#handleaddTags"
 					GridPane.rowIndex="1" GridPane.columnIndex="2"
-					styleClass="empty-textField,textfields" promptText="Add tags">
+					styleClass="empty-textField,textfields" promptText="Add tags"
+					prefWidth="500">
 					<font>
 						<Font size="14.0" />
 					</font>
@@ -162,7 +164,8 @@
 				</Label>
 				<TextField fx:id="refs" onAction="#addRefs"
 					GridPane.rowIndex="2" GridPane.columnIndex="2"
-					styleClass="empty-textField,textfields" promptText="Add references">
+					styleClass="empty-textField,textfields" promptText="Add references"
+					prefWidth="500">
 					<font>
 						<Font size="14.0" />
 					</font>

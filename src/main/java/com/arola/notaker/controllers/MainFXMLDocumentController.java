@@ -35,9 +35,6 @@ public class MainFXMLDocumentController implements Initializable {
 	private Button newNote; // addNote()
 
 	@FXML
-	private Button newNotebook; // addNotebook()
-
-	@FXML
 	private TextField tags;
 
 	@FXML
@@ -62,6 +59,11 @@ public class MainFXMLDocumentController implements Initializable {
 
 	@FXML
 	private TextField searchField;
+	
+	@FXML
+	private Button printNote;
+	
+	
 	/* ============= END:: NOT YET ==================== */
 	@FXML
 	private TextArea notesArea;
