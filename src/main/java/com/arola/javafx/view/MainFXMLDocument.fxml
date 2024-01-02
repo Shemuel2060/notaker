@@ -76,7 +76,7 @@
 				</graphic>
 			</Button>
 			<!-- print button -->
-			<Button fx:id="printNote" text="Print Note">
+			<Button fx:id="printNote" text="Print Note" onAction="#printNotes">
 				<font>
 					<Font size="14.0" />
 				</font>

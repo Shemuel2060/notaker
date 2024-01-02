@@ -1,11 +1,18 @@
 package com.arola.notaker.controllers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import com.arola.notaker.dao.NotesDao;
 import com.arola.notaker.entities.Note;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -59,11 +66,10 @@ public class MainFXMLDocumentController implements Initializable {
 
 	@FXML
 	private TextField searchField;
-	
+
 	@FXML
 	private Button printNote;
-	
-	
+
 	/* ============= END:: NOT YET ==================== */
 	@FXML
 	private TextArea notesArea;
@@ -260,6 +266,58 @@ public class MainFXMLDocumentController implements Initializable {
 
 		}
 
+	}
+
+	@FXML
+	private void printNotes() {
+		File file = new File("E:\\outputPDF\\testoutput3.pdf");
+		FileOutputStream fileName = null;
+		try {
+			fileName = new FileOutputStream(file);
+			PdfWriter writer = new PdfWriter(fileName);
+			PdfDocument pdf = new PdfDocument(writer);
+			Document document = new Document(pdf);
+			
+			// testing
+			
+			System.out.println("\n>>>>>>>>>> TESTING PDF PRINTING >>>>>>>>>>\n");
+			
+			// get notes, cues and summary from the DB
+			NotesDao notesDAO = new NotesDao();
+			Note wantedNote = notesDAO.getNoteByTitle(currentNoteTitle.getText());
+			
+			// notes details
+			Paragraph author = new Paragraph("By: "+nameLabel.getText());
+			Paragraph title = new Paragraph("Topic: "+currentNoteTitle.getText());
+			Paragraph noteDate = new Paragraph("Printed on: "+
+			LocalDate.now().toString());
+			
+			// notes
+			Paragraph notes = new Paragraph("NOTES\n"+
+			wantedNote.getContents()+"\n");
+			
+			// cues
+			Paragraph cues = new Paragraph("IDEAS & QUESTIONS\n"+
+					wantedNote.getCues()+"\n");
+	
+			// summary
+			Paragraph summary = new Paragraph("SUMMARY\n"+
+					wantedNote.getSummary()+"\n");
+			
+			document.add(title);
+			document.add(author);
+			document.add(noteDate);
+			document.add(notes);
+			document.add(cues);
+			document.add(summary);
+			
+			document.close();
+
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+		
 	}
 
 	@FXML
