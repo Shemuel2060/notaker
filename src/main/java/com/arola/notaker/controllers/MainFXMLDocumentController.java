@@ -62,7 +62,7 @@ public class MainFXMLDocumentController implements Initializable {
 	/* ============= NOT YET ==================== */
 
 	@FXML
-	private Button openNote;
+	private Button viewNotes;
 
 	@FXML
 	private TextField searchField;
@@ -115,6 +115,12 @@ public class MainFXMLDocumentController implements Initializable {
 			root.setStyle("-fx-background-color:#7cafc2");
 		}
 	}
+	
+	
+	@FXML
+	private void viewNotes() {
+
+	}
 
 	@FXML
 	/**
@@ -163,10 +169,7 @@ public class MainFXMLDocumentController implements Initializable {
 
 	}
 
-	@FXML
-	private void openNote() {
-
-	}
+	
 
 	@FXML
 	private void saveNotesContent(KeyEvent ke) {

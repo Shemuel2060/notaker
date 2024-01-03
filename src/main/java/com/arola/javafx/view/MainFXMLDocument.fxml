@@ -49,7 +49,7 @@
 					<Font size="14.0" />
 				</font>
 			</TextField>
-			<Button fx:id="openNote" text="Open Note" onAction="#openNote">
+			<Button fx:id="viewNotes" text="View Notes" onAction="#viewNotes">
 				<font>
 					<Font size="14.0" />
 				</font>
