@@ -273,7 +273,7 @@ public class MainFXMLDocumentController implements Initializable {
 
 	@FXML
 	private void printNotes() {
-		File file = new File("E:\\outputPDF\\testoutput3.pdf");
+		File file = new File("E:\\outputPDF\\testoutput4.pdf");
 		FileOutputStream fileName = null;
 		try {
 			fileName = new FileOutputStream(file);
