@@ -9,10 +9,16 @@ import java.util.ResourceBundle;
 
 import com.arola.notaker.dao.NotesDao;
 import com.arola.notaker.entities.Note;
+import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.borders.Border;
+import com.itextpdf.layout.borders.SolidBorder;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.sun.prism.paint.Color;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -115,8 +121,7 @@ public class MainFXMLDocumentController implements Initializable {
 			root.setStyle("-fx-background-color:#7cafc2");
 		}
 	}
-	
-	
+
 	@FXML
 	private void viewNotes() {
 
@@ -168,8 +173,6 @@ public class MainFXMLDocumentController implements Initializable {
 		}
 
 	}
-
-	
 
 	@FXML
 	private void saveNotesContent(KeyEvent ke) {
@@ -273,54 +276,95 @@ public class MainFXMLDocumentController implements Initializable {
 
 	@FXML
 	private void printNotes() {
+		// get the path where to print the pdf and its name
 		File file = new File("E:\\outputPDF\\testoutput4.pdf");
 		FileOutputStream fileName = null;
 		try {
 			fileName = new FileOutputStream(file);
+			// create the document
 			PdfWriter writer = new PdfWriter(fileName);
 			PdfDocument pdf = new PdfDocument(writer);
+
+			pdf.setDefaultPageSize(PageSize.A4);
+
 			Document document = new Document(pdf);
-			
+
 			// testing
-			
+
 			System.out.println("\n>>>>>>>>>> TESTING PDF PRINTING >>>>>>>>>>\n");
-			
+
 			// get notes, cues and summary from the DB
 			NotesDao notesDAO = new NotesDao();
 			Note wantedNote = notesDAO.getNoteByTitle(currentNoteTitle.getText());
-			
+
 			// notes details
-			Paragraph author = new Paragraph("By: "+nameLabel.getText());
-			Paragraph title = new Paragraph("Topic: "+currentNoteTitle.getText());
-			Paragraph noteDate = new Paragraph("Printed on: "+
-			LocalDate.now().toString());
-			
+			Paragraph author = new Paragraph(nameLabel.getText().toUpperCase());
+			Paragraph title = new Paragraph("Topic: " + currentNoteTitle.getText());
+			Paragraph noteDate = new Paragraph("Printed on: " + LocalDate.now().toString());
+
 			// notes
-			Paragraph notes = new Paragraph("NOTES\n"+
-			wantedNote.getContents()+"\n");
-			
+			Paragraph notes = new Paragraph("NOTES\n" + wantedNote.getContents() + "\n");
+
 			// cues
-			Paragraph cues = new Paragraph("IDEAS & QUESTIONS\n"+
-					wantedNote.getCues()+"\n");
-	
+			Paragraph cues = new Paragraph("IDEAS & QUESTIONS\n" + wantedNote.getCues() + "\n");
+
 			// summary
-			Paragraph summary = new Paragraph("SUMMARY\n"+
-					wantedNote.getSummary()+"\n");
+			Paragraph summary = new Paragraph("SUMMARY\n" + wantedNote.getSummary() + "\n");
+
+			// create header table with two columns
+			float col1 = 150f;
+			float col2 = col1 + 250f;
+
+			float[] headerWidth = { col1, col2 };
+
+			Table header = new Table(headerWidth);
+
+			// add block element, e.g. paragraph to a cell
+			Border b = new SolidBorder(1f/2f);
+			Border noBorder = Border.NO_BORDER;
 			
-			document.add(title);
-			document.add(author);
-			document.add(noteDate);
+			// put author in the first column of the header
+			float[] headerLeftWidth = {75f,75f};
+			Table headerLeft = new Table(headerLeftWidth);
+			
+			headerLeft.addCell(new Cell().add(author)
+					.setBorder(b));
+			/*put title and date into another table, add it to the cell
+			 * of the header's second column */
+			
+			float[] headerRightWidth = {col1, col1};
+			Table headerRight = new Table(headerRightWidth);
+			
+			headerRight.addCell(new Cell().add(title)
+					.setBorder(b));
+			headerRight.addCell(new Cell().add(new Paragraph("\n"))
+					.setBorder(b));
+			headerRight.addCell(new Cell().add(noteDate)
+					.setBorder(b));
+			
+			// add headerRight and headerLeft to header
+			header.addCell(headerLeft);
+			header.addCell(headerRight);
+			
+			/*Next:
+			 * 1. remove the borders...
+			 * 2. create similar thing for the notes, cues and summary sections
+			 * 3. text styling
+			 * 4. page numbering */
+
+			document.add(header);
+			
 			document.add(notes);
 			document.add(cues);
 			document.add(summary);
-			
+
 			document.close();
 
 		} catch (FileNotFoundException e) {
-			
+
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@FXML
