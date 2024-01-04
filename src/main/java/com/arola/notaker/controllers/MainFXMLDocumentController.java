@@ -18,6 +18,9 @@ import com.itextpdf.layout.borders.SolidBorder;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.HorizontalAlignment;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.VerticalAlignment;
 import com.sun.prism.paint.Color;
 
 import javafx.event.EventHandler;
@@ -312,10 +315,8 @@ public class MainFXMLDocumentController implements Initializable {
 			Paragraph summary = new Paragraph("SUMMARY\n" + wantedNote.getSummary() + "\n");
 
 			// create header table with two columns
-			float col1 = 150f;
-			float col2 = col1 + 250f;
 
-			float[] headerWidth = { col1, col2 };
+			float[] headerWidth = { 200f, 400f };
 
 			Table header = new Table(headerWidth);
 
@@ -324,39 +325,70 @@ public class MainFXMLDocumentController implements Initializable {
 			Border noBorder = Border.NO_BORDER;
 			
 			// put author in the first column of the header
-			float[] headerLeftWidth = {75f,75f};
+			float[] headerLeftWidth = {200f};
 			Table headerLeft = new Table(headerLeftWidth);
 			
-			headerLeft.addCell(new Cell().add(author)
-					.setBorder(b));
+			headerLeft.addCell(new Cell()
+					.add(author)
+					.setBorder(noBorder)
+					.setTextAlignment(TextAlignment.CENTER)
+					.setBold()
+					.setItalic()
+					);
+			
+			
 			/*put title and date into another table, add it to the cell
 			 * of the header's second column */
 			
-			float[] headerRightWidth = {col1, col1};
+			float[] headerRightWidth = {400f};
 			Table headerRight = new Table(headerRightWidth);
 			
 			headerRight.addCell(new Cell().add(title)
-					.setBorder(b));
-			headerRight.addCell(new Cell().add(new Paragraph("\n"))
-					.setBorder(b));
+					.setBorder(noBorder));
+			headerRight.addCell(new Cell()
+					.add(new Paragraph("\n"))
+					.setBorder(noBorder)
+					.setWidth(2.5f));
 			headerRight.addCell(new Cell().add(noteDate)
-					.setBorder(b));
+					.setBorder(noBorder));
+			
 			
 			// add headerRight and headerLeft to header
-			header.addCell(headerLeft);
-			header.addCell(headerRight);
+			header.addCell(new Cell().add(headerLeft)
+					.setBorderBottom(b)
+					.setBorderRight(b));
+			header.addCell(new Cell().add(headerRight).
+					setBorderBottom(b));
+			
 			
 			/*Next:
 			 * 1. remove the borders...
 			 * 2. create similar thing for the notes, cues and summary sections
 			 * 3. text styling
 			 * 4. page numbering */
+			
+			// create table for cues and notes
+			Table cueTable = new Table(new float[] {200f});
+			Table noteTable = new Table(new float[] {400f});
+			Table summaryTable = new Table(new float[] {600f});
+			
+			Table notes_cues = new Table(new float[] {200f, 400f});
+			
+			
+			// add two cells to each of the tables plus content
+			cueTable.addCell(new Cell().add(cues).setBorder(noBorder));
+			noteTable.addCell(new Cell().add(notes).setBorder(noBorder));
+			summaryTable.addCell(new Cell().add(summary));
+			
+			notes_cues.addCell(cueTable);
+			notes_cues.addCell(noteTable);
 
 			document.add(header);
-			
-			document.add(notes);
-			document.add(cues);
-			document.add(summary);
+			document.add(new Paragraph("\n"));
+			document.add(notes_cues);
+			document.add(new Paragraph("\n"));
+			document.add(summaryTable);
+		
 
 			document.close();
 
