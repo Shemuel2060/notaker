@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import com.arola.notaker.dao.NotesDao;
 import com.arola.notaker.entities.Note;
+import com.itextpdf.kernel.colors.DeviceRgb;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -18,10 +19,8 @@ import com.itextpdf.layout.borders.SolidBorder;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
-import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.TextAlignment;
-import com.itextpdf.layout.properties.VerticalAlignment;
-import com.sun.prism.paint.Color;
+import com.itextpdf.kernel.colors.Color;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -75,11 +74,12 @@ public class MainFXMLDocumentController implements Initializable {
 
 	@FXML
 	private TextField searchField;
+	/* ============= END:: NOT YET ==================== */
 
 	@FXML
 	private Button printNote;
 
-	/* ============= END:: NOT YET ==================== */
+	
 	@FXML
 	private TextArea notesArea;
 
@@ -291,6 +291,8 @@ public class MainFXMLDocumentController implements Initializable {
 			pdf.setDefaultPageSize(PageSize.A4);
 
 			Document document = new Document(pdf);
+			
+			Color headerColor = new DeviceRgb(0, 0, 255);
 
 			// testing
 
@@ -302,17 +304,23 @@ public class MainFXMLDocumentController implements Initializable {
 
 			// notes details
 			Paragraph author = new Paragraph(nameLabel.getText().toUpperCase());
-			Paragraph title = new Paragraph("Topic: " + currentNoteTitle.getText());
+			Paragraph nbName = new Paragraph("Notebook: " + 
+					currentNotebookName.getText());
 			Paragraph noteDate = new Paragraph("Printed on: " + LocalDate.now().toString());
 
 			// notes
-			Paragraph notes = new Paragraph("NOTES\n" + wantedNote.getContents() + "\n");
+			
+			Paragraph title = new Paragraph(currentNoteTitle.getText())
+					.setFontColor(headerColor, 1)
+					.setBold().setCharacterSpacing(0.5f);
+			
+			Paragraph notes = new Paragraph(wantedNote.getContents() + "\n");
 
 			// cues
-			Paragraph cues = new Paragraph("IDEAS & QUESTIONS\n" + wantedNote.getCues() + "\n");
+			Paragraph cues = new Paragraph(wantedNote.getCues() + "\n");
 
 			// summary
-			Paragraph summary = new Paragraph("SUMMARY\n" + wantedNote.getSummary() + "\n");
+			Paragraph summary = new Paragraph(wantedNote.getSummary() + "\n");
 
 			// create header table with two columns
 
@@ -329,7 +337,8 @@ public class MainFXMLDocumentController implements Initializable {
 			Table headerLeft = new Table(headerLeftWidth);
 			
 			headerLeft.addCell(new Cell()
-					.add(author)
+					.add(author.setFontColor(headerColor, 1)
+							.setBold().setCharacterSpacing(0.5f))
 					.setBorder(noBorder)
 					.setTextAlignment(TextAlignment.CENTER)
 					.setBold()
@@ -343,13 +352,15 @@ public class MainFXMLDocumentController implements Initializable {
 			float[] headerRightWidth = {400f};
 			Table headerRight = new Table(headerRightWidth);
 			
-			headerRight.addCell(new Cell().add(title)
+			headerRight.addCell(new Cell().add(nbName.setFontColor(headerColor, 1)
+					.setBold().setCharacterSpacing(0.5f))
 					.setBorder(noBorder));
 			headerRight.addCell(new Cell()
 					.add(new Paragraph("\n"))
 					.setBorder(noBorder)
 					.setWidth(2.5f));
-			headerRight.addCell(new Cell().add(noteDate)
+			headerRight.addCell(new Cell().add(noteDate.setFontColor(headerColor, 1)
+					.setBold().setCharacterSpacing(0.5f))
 					.setBorder(noBorder));
 			
 			
@@ -376,8 +387,31 @@ public class MainFXMLDocumentController implements Initializable {
 			
 			
 			// add two cells to each of the tables plus content
-			cueTable.addCell(new Cell().add(cues).setBorder(noBorder));
-			noteTable.addCell(new Cell().add(notes).setBorder(noBorder));
+			
+			cueTable.addCell(new Cell()
+					.add(new Paragraph("Ideas & questions")
+							.setFontColor(headerColor, 1))
+					.setBorder(noBorder));
+			
+			cueTable.addCell(new Cell()
+					.add(cues)
+					.setBorder(noBorder));
+			
+			
+			noteTable.addCell(new Cell()
+					.add(title)
+					.setBorder(noBorder));
+			
+			noteTable.addCell(new Cell()
+					.add(notes)
+					.setBorder(noBorder));
+			
+			
+			summaryTable.addCell(new Cell()
+					.add(new Paragraph("Summary").setFontColor(headerColor, 1)
+							.setBold().setCharacterSpacing(0.5f))
+					.setBorder(noBorder));
+			
 			summaryTable.addCell(new Cell().add(summary));
 			
 			notes_cues.addCell(cueTable);
@@ -399,6 +433,9 @@ public class MainFXMLDocumentController implements Initializable {
 
 	}
 
+	
+	
+	
 	@FXML
 	private void handleaddTags() {
 
