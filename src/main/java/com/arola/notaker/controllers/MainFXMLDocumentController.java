@@ -20,6 +20,7 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.io.exceptions.IOException;
 import com.itextpdf.kernel.colors.Color;
 
 import javafx.event.EventHandler;
@@ -28,16 +29,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -279,157 +283,185 @@ public class MainFXMLDocumentController implements Initializable {
 
 	@FXML
 	private void printNotes() {
-		// get the path where to print the pdf and its name
-		File file = new File("E:\\outputPDF\\testoutput4.pdf");
-		FileOutputStream fileName = null;
-		try {
-			fileName = new FileOutputStream(file);
-			// create the document
-			PdfWriter writer = new PdfWriter(fileName);
-			PdfDocument pdf = new PdfDocument(writer);
+		FileChooser fileChooser = new FileChooser();
 
-			pdf.setDefaultPageSize(PageSize.A4);
+	    fileChooser.setTitle("Save PDF File");
+	    fileChooser.getExtensionFilters().add(
+	    		new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
 
-			Document document = new Document(pdf);
-			
-			Color headerColor = new DeviceRgb(0, 0, 255);
+	    // Show the file save dialog and get the selected file
+	    File selectedFile = fileChooser.showSaveDialog(null);
+	    
+	 // Check if a file was selected
+	    if (selectedFile != null) {
+	        try {
+	            FileOutputStream fileName = new FileOutputStream(selectedFile);
 
-			// testing
+	         // create the document
+				PdfWriter writer = new PdfWriter(fileName);
+				PdfDocument pdf = new PdfDocument(writer);
 
-			System.out.println("\n>>>>>>>>>> TESTING PDF PRINTING >>>>>>>>>>\n");
+				pdf.setDefaultPageSize(PageSize.A4);
 
-			// get notes, cues and summary from the DB
-			NotesDao notesDAO = new NotesDao();
-			Note wantedNote = notesDAO.getNoteByTitle(currentNoteTitle.getText());
+				Document document = new Document(pdf);
+				
+				Color headerColor = new DeviceRgb(0, 0, 255);
 
-			// notes details
-			Paragraph author = new Paragraph(nameLabel.getText().toUpperCase());
-			Paragraph nbName = new Paragraph("Notebook: " + 
-					currentNotebookName.getText());
-			Paragraph noteDate = new Paragraph("Printed on: " + LocalDate.now().toString());
+				// testing
 
-			// notes
-			
-			Paragraph title = new Paragraph(currentNoteTitle.getText())
-					.setFontColor(headerColor, 1)
-					.setBold().setCharacterSpacing(0.5f);
-			
-			Paragraph notes = new Paragraph(wantedNote.getContents() + "\n");
+				System.out.println("\n>>>>>>>>>> TESTING PDF PRINTING >>>>>>>>>>\n");
 
-			// cues
-			Paragraph cues = new Paragraph(wantedNote.getCues() + "\n");
+				// get notes, cues and summary from the DB
+				NotesDao notesDAO = new NotesDao();
+				Note wantedNote = notesDAO.getNoteByTitle(currentNoteTitle.getText());
 
-			// summary
-			Paragraph summary = new Paragraph(wantedNote.getSummary() + "\n");
+				// notes details
+				Paragraph author = new Paragraph(nameLabel.getText().toUpperCase());
+				Paragraph nbName = new Paragraph("Notebook: " + 
+						currentNotebookName.getText());
+				Paragraph noteDate = new Paragraph("Printed on: " + LocalDate.now().toString());
 
-			// create header table with two columns
+				// notes
+				
+				Paragraph title = new Paragraph(currentNoteTitle.getText())
+						.setFontColor(headerColor, 1)
+						.setBold().setCharacterSpacing(0.5f);
+				
+				Paragraph notes = new Paragraph(wantedNote.getContents() + "\n");
 
-			float[] headerWidth = { 200f, 400f };
+				// cues
+				Paragraph cues = new Paragraph(wantedNote.getCues() + "\n");
 
-			Table header = new Table(headerWidth);
+				// summary
+				Paragraph summary = new Paragraph(wantedNote.getSummary() + "\n");
 
-			// add block element, e.g. paragraph to a cell
-			Border b = new SolidBorder(1f/2f);
-			Border noBorder = Border.NO_BORDER;
-			
-			// put author in the first column of the header
-			float[] headerLeftWidth = {200f};
-			Table headerLeft = new Table(headerLeftWidth);
-			
-			headerLeft.addCell(new Cell()
-					.add(author.setFontColor(headerColor, 1)
-							.setBold().setCharacterSpacing(0.5f))
-					.setBorder(noBorder)
-					.setTextAlignment(TextAlignment.CENTER)
-					.setBold()
-					.setItalic()
-					);
-			
-			
-			/*put title and date into another table, add it to the cell
-			 * of the header's second column */
-			
-			float[] headerRightWidth = {400f};
-			Table headerRight = new Table(headerRightWidth);
-			
-			headerRight.addCell(new Cell().add(nbName.setFontColor(headerColor, 1)
-					.setBold().setCharacterSpacing(0.5f))
-					.setBorder(noBorder));
-			headerRight.addCell(new Cell()
-					.add(new Paragraph("\n"))
-					.setBorder(noBorder)
-					.setWidth(2.5f));
-			headerRight.addCell(new Cell().add(noteDate.setFontColor(headerColor, 1)
-					.setBold().setCharacterSpacing(0.5f))
-					.setBorder(noBorder));
-			
-			
-			// add headerRight and headerLeft to header
-			header.addCell(new Cell().add(headerLeft)
-					.setBorderBottom(b)
-					.setBorderRight(b));
-			header.addCell(new Cell().add(headerRight).
-					setBorderBottom(b));
-			
-			
-			/*Next:
-			 * 1. remove the borders...
-			 * 2. create similar thing for the notes, cues and summary sections
-			 * 3. text styling
-			 * 4. page numbering */
-			
-			// create table for cues and notes
-			Table cueTable = new Table(new float[] {200f});
-			Table noteTable = new Table(new float[] {400f});
-			Table summaryTable = new Table(new float[] {600f});
-			
-			Table notes_cues = new Table(new float[] {200f, 400f});
-			
-			
-			// add two cells to each of the tables plus content
-			
-			cueTable.addCell(new Cell()
-					.add(new Paragraph("Ideas & questions")
-							.setFontColor(headerColor, 1))
-					.setBorder(noBorder));
-			
-			cueTable.addCell(new Cell()
-					.add(cues)
-					.setBorder(noBorder));
-			
-			
-			noteTable.addCell(new Cell()
-					.add(title)
-					.setBorder(noBorder));
-			
-			noteTable.addCell(new Cell()
-					.add(notes)
-					.setBorder(noBorder));
-			
-			
-			summaryTable.addCell(new Cell()
-					.add(new Paragraph("Summary").setFontColor(headerColor, 1)
-							.setBold().setCharacterSpacing(0.5f))
-					.setBorder(noBorder));
-			
-			summaryTable.addCell(new Cell().add(summary));
-			
-			notes_cues.addCell(cueTable);
-			notes_cues.addCell(noteTable);
+				// create header table with two columns
 
-			document.add(header);
-			document.add(new Paragraph("\n"));
-			document.add(notes_cues);
-			document.add(new Paragraph("\n"));
-			document.add(summaryTable);
+				float[] headerWidth = { 200f, 400f };
+
+				Table header = new Table(headerWidth);
+
+				// add block element, e.g. paragraph to a cell
+				Border b = new SolidBorder(1f/2f);
+				Border noBorder = Border.NO_BORDER;
+				
+				// put author in the first column of the header
+				float[] headerLeftWidth = {200f};
+				Table headerLeft = new Table(headerLeftWidth);
+				
+				headerLeft.addCell(new Cell()
+						.add(author.setFontColor(headerColor, 1)
+								.setBold().setCharacterSpacing(0.5f))
+						.setBorder(noBorder)
+						.setTextAlignment(TextAlignment.CENTER)
+						.setBold()
+						.setItalic()
+						);
+				
+				
+				/*put title and date into another table, add it to the cell
+				 * of the header's second column */
+				
+				float[] headerRightWidth = {400f};
+				Table headerRight = new Table(headerRightWidth);
+				
+				headerRight.addCell(new Cell().add(nbName.setFontColor(headerColor, 1)
+						.setBold().setCharacterSpacing(0.5f))
+						.setBorder(noBorder));
+				headerRight.addCell(new Cell()
+						.add(new Paragraph("\n"))
+						.setBorder(noBorder)
+						.setWidth(2.5f));
+				headerRight.addCell(new Cell().add(noteDate.setFontColor(headerColor, 1)
+						.setBold().setCharacterSpacing(0.5f))
+						.setBorder(noBorder));
+				
+				
+				// add headerRight and headerLeft to header
+				header.addCell(new Cell().add(headerLeft)
+						.setBorderBottom(b)
+						.setBorderRight(b));
+				header.addCell(new Cell().add(headerRight).
+						setBorderBottom(b));
+				
+				
+				/*Next:
+				 * 1. remove the borders...
+				 * 2. create similar thing for the notes, cues and summary sections
+				 * 3. text styling
+				 * 4. page numbering */
+				
+				// create table for cues and notes
+				Table cueTable = new Table(new float[] {200f});
+				Table noteTable = new Table(new float[] {400f});
+				Table summaryTable = new Table(new float[] {600f});
+				
+				Table notes_cues = new Table(new float[] {200f, 400f});
+				
+				
+				// add two cells to each of the tables plus content
+				
+				cueTable.addCell(new Cell()
+						.add(new Paragraph("Ideas & questions")
+								.setFontColor(headerColor, 1))
+						.setBorder(noBorder));
+				
+				cueTable.addCell(new Cell()
+						.add(cues)
+						.setBorder(noBorder));
+				
+				
+				noteTable.addCell(new Cell()
+						.add(title)
+						.setBorder(noBorder));
+				
+				noteTable.addCell(new Cell()
+						.add(notes)
+						.setBorder(noBorder));
+				
+				
+				summaryTable.addCell(new Cell()
+						.add(new Paragraph("Summary").setFontColor(headerColor, 1)
+								.setBold().setCharacterSpacing(0.5f))
+						.setBorder(noBorder));
+				
+				summaryTable.addCell(new Cell().add(summary));
+				
+				notes_cues.addCell(cueTable);
+				notes_cues.addCell(noteTable);
+
+				document.add(header);
+				document.add(new Paragraph("\n"));
+				document.add(notes_cues);
+				document.add(new Paragraph("\n"));
+				document.add(summaryTable);
+			
+
+				document.close();
+
+
+	            fileName.close();
+	            Alert alert = new Alert(AlertType.INFORMATION);
+	        	alert.setContentText("File saved at: "+selectedFile.getAbsolutePath());
+	        	alert.show();
+
+	   
+	        } catch (FileNotFoundException e) {
+	        	Alert alert = new Alert(AlertType.ERROR);
+	        	alert.setContentText("An Error Occurred while saving file");
+	        	alert.show();
+	        } catch (java.io.IOException e) {
+	        	Alert alert = new Alert(AlertType.ERROR);
+	        	alert.setContentText("An Error Occurred while saving file");
+	        	alert.show();
+			}
+	    } else {
+	    	Alert alert = new Alert(AlertType.WARNING);
+        	alert.setContentText("Operation cancelled!");
+        	alert.show();
+	    }
 		
-
-			document.close();
-
-		} catch (FileNotFoundException e) {
-
-			e.printStackTrace();
-		}
+		
 
 	}
 
