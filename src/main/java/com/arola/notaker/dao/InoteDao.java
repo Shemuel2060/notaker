@@ -1,6 +1,7 @@
 package com.arola.notaker.dao;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.arola.notaker.entities.Note;
 import com.arola.notaker.entities.Reminder;
@@ -70,6 +71,12 @@ public interface InoteDao {
 	 * @return
 	 */
 	public Note getNoteById(int id);
+	
+	/**
+	 * Get all notes from the DB.
+	 * @return List of all notes
+	 */
+	public List<Note> getAllNotes();
 	
 	
 	/**

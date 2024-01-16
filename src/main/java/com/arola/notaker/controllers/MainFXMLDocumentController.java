@@ -131,6 +131,27 @@ public class MainFXMLDocumentController implements Initializable {
 
 	@FXML
 	private void viewNotes() {
+		
+		try {
+			// Load the FXML for the new window
+			URL fxmlLocation = getClass().getResource("/com/arola/javafx/view/viewNotesWindow.fxml");
+			System.out.println("WORKING: " + fxmlLocation);
+			FXMLLoader loader = new FXMLLoader(fxmlLocation);
+			Parent root = loader.load();
+			ViewNotesController controller = loader.getController();
+
+			// Create a new stage
+			Stage viewNotesStage = new Stage();
+			viewNotesStage.initModality(Modality.APPLICATION_MODAL);
+			viewNotesStage.setTitle("View Notes");
+			viewNotesStage.getIcons().add(new Image("/images_icons/arola-logo.png"));
+			viewNotesStage.setScene(new Scene(root));
+
+			// Show the new stage
+			viewNotesStage.showAndWait();
+		}catch(Exception e) {
+			System.err.println(e.toString());
+		}
 
 	}
 
@@ -385,7 +406,7 @@ public class MainFXMLDocumentController implements Initializable {
 						setBorderBottom(b));
 				
 				
-				/*Next:
+				/*Future:
 				 * 1. remove the borders...
 				 * 2. create similar thing for the notes, cues and summary sections
 				 * 3. text styling

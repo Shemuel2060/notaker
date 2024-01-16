@@ -1,6 +1,7 @@
 package com.arola.notaker.dao;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -30,11 +31,16 @@ public class NotesDao implements InoteDao {
 
 			tx.commit();
 			NotesDao note_dao = new NotesDao();
-			Note n0 = note_dao.createNote("Chemical Kinetics", today, user0);
-			Note n1 = note_dao.createNote("Quantum Chemistry", yest, user1);
-			Note n2 = note_dao.createNote("Electrochemistry", today, user2);
-			Note n3 = note_dao.createNote("Statistical Mechanics", past, user3);
-			Note n4 = note_dao.createNote("Spectroscopy", today, user4);
+			Note n0 = note_dao.createNote("Chemical Kinetics", today, 
+					user0.getUserName());
+			Note n1 = note_dao.createNote("Quantum Chemistry", yest, 
+					user1.getUserName());
+			Note n2 = note_dao.createNote("Electrochemistry", today, 
+					user2.getUserName());
+			Note n3 = note_dao.createNote("Statistical Mechanics", past, 
+					user3.getUserName());
+			Note n4 = note_dao.createNote("Spectroscopy", today,
+					user4.getUserName());
 
 		}
 
@@ -170,6 +176,20 @@ public class NotesDao implements InoteDao {
 		}
 
 	} // END:: getNoteById(int id)
+	
+	@Override
+	public List<Note> getAllNotes() {
+		// TODO Auto-generated method stub
+		List<Note> allNotes = new ArrayList<>();
+		
+		 Session session = SessionUtil.getSession();
+		 Query<Note> query = session.createQuery("from Note", Note.class);
+		 
+		 allNotes = query.getResultList();		
+		
+		return allNotes;
+	}
+	
 
 	/* ==================== UPDATING notes ==================== */
 
@@ -317,5 +337,7 @@ public class NotesDao implements InoteDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

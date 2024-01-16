@@ -5,6 +5,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.testng.annotations.AfterMethod;
@@ -120,6 +121,20 @@ public class NoteDaoTests {
 		n = noteDao.getNoteByTitle("Java Data Programming");
 		assertNull(n.getContents());
 		
+	}
+	
+	@Test
+	public void testpopulateNotesData() {
+		NotesDao.populateNotesData();
+	}
+	
+	@Test
+	public void testGetAllNotes() {
+		List<Note> notes = noteDao.getAllNotes();
+		
+		for(Note n:notes) {
+			System.out.println(n.getTitle());
+		}
 	}
 
 } // END:: NoteDaoTests class

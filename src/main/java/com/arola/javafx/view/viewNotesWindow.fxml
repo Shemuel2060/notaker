@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<?xml-model href=""?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.arola.notaker.controllers.ViewNotesController">
+
+    <center>
+        <!-- Define your TableView -->
+        <TableView fx:id="table">
+            <!-- Define your TableColumns -->
+            <columns>
+              <TableColumn text="Author" fx:id="authorColumn" prefWidth="150"></TableColumn>
+              <TableColumn text="Notebook" fx:id="notebook" prefWidth="150"></TableColumn>
+              <TableColumn text="Title" fx:id="titleColumn" prefWidth="150"></TableColumn>              
+              <TableColumn text="Creation Date" fx:id="creationDate" prefWidth="150"></TableColumn>
+              <!-- <TableColumn text="Actions" fx:id="actions" prefWidth="300"></TableColumn> -->
+              
+            </columns>
+        </TableView>
+        
+        
+    </center>
+
+</BorderPane>
