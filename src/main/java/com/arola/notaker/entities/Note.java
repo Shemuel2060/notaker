@@ -86,12 +86,16 @@ public class Note {
 			})
     private List<Refs> referenced;
 
+
 	public Note(String title, LocalDate creationDate, User user) {
 		this.title = title;
 		this.creationDate = creationDate;
 		this.user = user;
 	}
 	
+	
+	
+
 	
 
 	
