@@ -21,13 +21,11 @@
 					prefWidth="150" />
 				<TableColumn text="Creation Date" fx:id="creationDate"
 					prefWidth="150" />
-				<TableColumn text="Actions" fx:id="actions"
-					prefWidth="300" />
 
 			</columns>
 		</TableView>
 
-
 	</center>
+	
 
 </BorderPane>
