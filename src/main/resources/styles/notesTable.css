@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+
+.table-btn{
+	-fx-background-color: #00c9c8; /* Green background color */
+    -fx-text-fill: white; /* White text color */
+    -fx-border-radius: 15px; /* Border radius */
+    -fx-padding: 10px 20px; /* Padding (top, right, bottom, left) */
+    -fx-font-size: 14px; /* Font size */
+    -fx-font-weight: BOLD;
+}
+
+.table-btn-hbox{
+	
+}

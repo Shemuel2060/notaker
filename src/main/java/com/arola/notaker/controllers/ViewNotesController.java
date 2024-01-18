@@ -31,6 +31,10 @@ public class ViewNotesController implements Initializable{
 	@FXML private TableColumn<Note,LocalDate> creationDate;
 	
 	
+	// buttons
+	@FXML private Button openNote;
+	@FXML private Button printNote;
+	@FXML private Button deleteNote;
 	
 	
 	@Override
@@ -54,6 +58,21 @@ public class ViewNotesController implements Initializable{
 		NotesDao notesDAO = new NotesDao();
 		List<Note> notes = notesDAO.getAllNotes();
 		return FXCollections.observableArrayList(notes);
+		
+	}
+	
+	@FXML
+	private void printNote() {
+		
+	}
+	
+	@FXML
+	private void openNote() {
+		
+	}
+	
+	@FXML
+	private void deleteNote() {
 		
 	}
 	

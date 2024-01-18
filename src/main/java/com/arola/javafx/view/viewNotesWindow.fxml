@@ -2,11 +2,15 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 
 
 <?xml-model href=""?>
+<?import javafx.scene.control.Button?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="com.arola.notaker.controllers.ViewNotesController">
+	fx:controller="com.arola.notaker.controllers.ViewNotesController"
+	stylesheets="/styles/notesTable.css">
 
 	<center>
 		<!-- Define your TableView -->
@@ -26,6 +30,54 @@
 		</TableView>
 
 	</center>
-	
+
+	<bottom>
+		<HBox alignment="CENTER" spacing="10" styleClass="table-btn-hbox">
+			<Button fx:id="openNote" text="Open Note" onAction="#openNote">
+				<font>
+					<Font size="14.0" />
+				</font>
+				<graphic>
+					<ImageView fitHeight="15.0" fitWidth="15.0"
+						pickOnBounds="true" preserveRatio="true">
+						<image>
+							<Image url="@/images_icons/open-icon.png" />
+						</image>
+					</ImageView>
+				</graphic>
+			</Button>
+
+			<Button fx:id="printNote" text="Print Note"
+				onAction="#printNote">
+				<font>
+					<Font size="14.0" />
+				</font>
+				<graphic>
+					<ImageView fitHeight="15.0" fitWidth="15.0"
+						pickOnBounds="true" preserveRatio="true">
+						<image>
+							<Image url="@/images_icons/print-icon.png" />
+						</image>
+					</ImageView>
+				</graphic>
+			</Button>
+
+			<Button fx:id="deleteNote" text="Delete Note"
+				onAction="#deleteNote">
+				<font>
+					<Font size="14.0" />
+				</font>
+				<graphic>
+					<ImageView fitHeight="15.0" fitWidth="15.0"
+						pickOnBounds="true" preserveRatio="true">
+						<image>
+							<Image url="@/images_icons/delete-icon.png" />
+						</image>
+					</ImageView>
+				</graphic>
+			</Button>
+		</HBox>
+
+	</bottom>
 
 </BorderPane>
