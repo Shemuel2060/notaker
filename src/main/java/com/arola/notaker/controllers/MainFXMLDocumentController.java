@@ -153,20 +153,22 @@ public class MainFXMLDocumentController implements Initializable {
 			
 			// get access to deleteNote button
 			if(controller.isDeleteButtonClicked){
-				Stage stage = (Stage) controller.getDeleteNote().getScene().getWindow();
 				
-				Note selectedNote = controller.deleteNote();
-				System.out.println("SELECTED NOTE IN MAIN VIEW: "+ selectedNote);
-
+				System.out.println("----> In the main view controller");
+				
+				Note selectedNote = controller.getSelectedNote();
+				System.out.println("----> "+selectedNote.getTitle());
+				
 				controller.clearMainViewContents(selectedNote,nameLabel, currentNoteTitle, 
 						currentNotebookName, notesArea, cueArea, summaryArea, 
 						comment, creationDate);	
+				
 				System.out.println("CLEARED FIELDS ");
 				// also empty the fields in the DB.
 				NotesDao notesDAO = new NotesDao();
 				notesDAO.deleteNoteByTitle(selectedNote.getTitle());
 				
-				stage.close();
+				
 				
 			}
 			

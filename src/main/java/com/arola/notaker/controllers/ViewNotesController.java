@@ -48,6 +48,8 @@ public class ViewNotesController implements Initializable {
 	public boolean isDeleteButtonClicked = false;
 	public boolean isOpenButtonClicked = false;
 	public boolean isPrintButtonClicked = false;
+	
+	private Note selectedNote;
 
 	private NotesDao notesDao = new NotesDao();
 
@@ -100,25 +102,27 @@ public class ViewNotesController implements Initializable {
 		// get the selectionModel
 		TableViewSelectionModel<Note> selections = table.getSelectionModel();
 		// get selected note
-		Note selectedNote = selections.getSelectedItem();
+		selectedNote = selections.getSelectedItem();
 
 		return selectedNote;
 	}
 
 	@FXML
-	public Note deleteNote() {
-
+	public void deleteNote() {
+		Stage stage = (Stage) deleteNote.getScene().getWindow();
 		// get the stage or window
 		
 		// get selected note
-		Note selectedNote = selectedNote();
+		selectedNote = selectedNote();
 		System.out.println("SELECTED NOTE IN DELETENOTE(): "+ selectedNote.getTitle());
+
+		isDeleteButtonClicked = true; // delete button clicked.
+		System.out.println("DELETE BUTTON CLICKED? "+isDeleteButtonClicked);
+		
 		// delete note from the table
 		table.getItems().removeAll(selectedNote);
 		
-		isDeleteButtonClicked = true; // delete button clicked.
-		
-		return selectedNote;
+		stage.close();
 	}
 
 	/**
@@ -141,21 +145,23 @@ public class ViewNotesController implements Initializable {
 //		System.out.print("\nSELECTED NOTE TITLE: "+selectedNote.getTitle()+"\n");
 		System.out.print("\nCURRENT NOTE TITLE: "+ noteTitle.getText()+"\n");
 		
+		System.out.println("SELECTED NOTE TITLE: "+ selectedNote.getTitle());
 		
-		if(noteTitle.getText()!="" && (selectedNote.getTitle() == noteTitle.getText())) {
+		
+		if(selectedNote.getTitle() == noteTitle.getText()) {
 			/* check if they belong to the selected note. This is on the assumption
 			 * that the titles for all notes are different.*/
 			
-			name.setText(null);
-			noteTitle.setText(null);
-			notebookName.setText(null);
+			name.setText("");
+			noteTitle.setText("");
+			notebookName.setText("");
 
-			notes.setText(null);
-			cues.setText(null);
-			summary.setText(null);
+			notes.setText("");
+			cues.setText("");
+			summary.setText("");
 
-			comment.setText(null);
-			creationDate.setText(null);
+			comment.setText("");
+			creationDate.setText("");
 		
 				
 		}
@@ -230,6 +236,14 @@ public class ViewNotesController implements Initializable {
 
 	public void setDeleteNote(Button deleteNote) {
 		this.deleteNote = deleteNote;
+	}
+
+	public Note getSelectedNote() {
+		return selectedNote;
+	}
+
+	public void setSelectedNote(Note selectedNote) {
+		this.selectedNote = selectedNote;
 	}
 	
 	
