@@ -139,8 +139,9 @@ public class ViewNotesController implements Initializable {
 	 * @param comment
 	 * @param creationDate
 	 */
-	public void clearMainViewContents(Note selectedNote, Label name, Label noteTitle, Label notebookName, TextArea notes, TextArea cues,
-			TextArea summary, TextField comment, Text creationDate) {
+	public void clearMainViewContents(Note selectedNote, Label name, Label noteTitle, 
+			Label notebookName, TextArea notes, TextArea cues,TextArea summary, 
+			TextField comment, Text creationDate) {
 		
 //		System.out.print("\nSELECTED NOTE TITLE: "+selectedNote.getTitle()+"\n");
 		System.out.print("\nCURRENT NOTE TITLE: "+ noteTitle.getText()+"\n");
@@ -148,7 +149,7 @@ public class ViewNotesController implements Initializable {
 		System.out.println("SELECTED NOTE TITLE: "+ selectedNote.getTitle());
 		
 		
-		if(selectedNote.getTitle() == noteTitle.getText()) {
+		if(selectedNote.getTitle().equals(noteTitle.getText())) {
 			/* check if they belong to the selected note. This is on the assumption
 			 * that the titles for all notes are different.*/
 			
