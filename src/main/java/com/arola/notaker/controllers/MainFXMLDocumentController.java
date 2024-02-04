@@ -149,6 +149,59 @@ public class MainFXMLDocumentController implements Initializable {
 
 			// Show the new stage
 			viewNotesStage.showAndWait();
+			
+			
+			// get access to deleteNote button
+			if(controller.isDeleteButtonClicked){
+				
+				System.out.println("----> In the main view controller");
+				
+				Note selectedNote = controller.getSelectedNote();
+				System.out.println("----> "+selectedNote.getTitle());
+				
+				controller.clearMainViewContents(selectedNote,nameLabel, currentNoteTitle, 
+						currentNotebookName, notesArea, cueArea, summaryArea, 
+						comment, creationDate);	
+				
+				System.out.println("CLEARED FIELDS ");
+				// also empty the fields in the DB.
+				NotesDao notesDAO = new NotesDao();
+				notesDAO.deleteNoteByTitle(selectedNote.getTitle());
+				
+				
+				
+			}
+			
+			if(controller.isOpenButtonClicked) {
+				Note selectedNote = controller.selectedNote();
+				
+				//use selected note to populate the fields
+				nameLabel.setText(selectedNote.getUser().getUserName());
+				currentNoteTitle.setText(selectedNote.getTitle());
+				currentNotebookName.setText(selectedNote.getNotebook().getTitle());
+				creationDate.setText(selectedNote.getCreationDate().toString());
+				
+				// the areas
+				notesArea.setText(selectedNote.getContents());
+				cueArea.setText(selectedNote.getCues());
+				summaryArea.setText(selectedNote.getSummary());
+				
+			}
+			
+			if(controller.isPrintButtonClicked) {
+				Note selectedNote = controller.selectedNote();				
+				printNotes();
+			}
+			// check if it is clicked
+			// if yes, call the method that clears areas on the main view
+			// if not, then leave them there...
+			
+			// do the same for the other two buttons.
+			
+			
+			
+			
+			
 		}catch(Exception e) {
 			System.err.println(e.toString());
 		}
@@ -194,6 +247,14 @@ public class MainFXMLDocumentController implements Initializable {
 			// set the notebook name
 			String notebookName = controller.getNotebookTitle().getText().toUpperCase();
 			currentNotebookName.setText(notebookName);
+			
+			// make the typing areas blank
+			notesArea.setText("");
+			summaryArea.setText("");
+			cueArea.setText("");
+			comment.setText("");
+			
+			
 
 		} catch (Exception e) {
 
@@ -264,7 +325,6 @@ public class MainFXMLDocumentController implements Initializable {
 
 		// check if note's content is empty, if yes, add notes being types
 		if (note.getCues() == "") { // note content is empty
-			// add typed summary to the note
 
 			note.setCues(cueArea.getText());
 
@@ -327,10 +387,6 @@ public class MainFXMLDocumentController implements Initializable {
 				Document document = new Document(pdf);
 				
 				Color headerColor = new DeviceRgb(0, 0, 255);
-
-				// testing
-
-				System.out.println("\n>>>>>>>>>> TESTING PDF PRINTING >>>>>>>>>>\n");
 
 				// get notes, cues and summary from the DB
 				NotesDao notesDAO = new NotesDao();

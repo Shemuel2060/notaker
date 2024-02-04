@@ -65,6 +65,7 @@ public class AddNoteController {
 			// get note title input
 			String title = noteTitle.getText();
 
+			// create note in the DB and persist it there..
 			notesDao.createNote(title, date, ownerName, notebookName, desc);
 
 			// close stage after persisting note to DB
